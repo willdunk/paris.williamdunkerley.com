@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {ThemeProvider} from '@material-ui/core';
+import theme from './assets/theme';
 import Container from './components/Container';
 
 const App = () => (
 	<div className="App">
-		<Container />
+		<ThemeProvider theme={theme}>
+			<Container />
+		</ThemeProvider>
 	</div>
 );
 ReactDOM.render(<App />, document.getElementById('root'));
