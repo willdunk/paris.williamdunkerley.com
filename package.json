@@ -1,0 +1,34 @@
+{
+	"name": "fronttest",
+	"license": "MIT",
+	"scripts": {
+		"start": "cross-env NODE_ENV=development parcel index.html ",
+		"build": "cross-env NODE_ENV=production parcel build index.html --no-minify --public-url /"
+	},
+	"dependencies": {
+		"@material-ui/core": "^4.9.5",
+		"autoprefixer": "^7.2.1",
+		"babel-preset-react-app": "^3.1.0",
+		"parcel-bundler": "latest",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0"
+	},
+	"postcss": {
+		"modules": false,
+		"plugins": {
+			"autoprefixer": {
+				"browsers": [
+					">1%",
+					"last 4 versions",
+					"Firefox ESR",
+					"not ie < 9"
+				],
+				"flexbox": "no-2009"
+			}
+		}
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"cross-env": "^5.1.1"
+	}
+}
