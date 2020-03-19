@@ -1,14 +1,12 @@
 import {createMuiTheme} from '@material-ui/core/styles';
+import {blue, lightblue} from './colors/blue';
 
 export const theme = createMuiTheme({
 	palette: {
-		primary: {
-			main: '#334364',
-			contrastText: '#FFFFFF'
-		},
-		secondary: {
-			main: '#447ee3',
-			contrastText: '#000000'
+		primary: blue,
+		secondary: lightblue,
+		background: {
+			default: blue.main,
 		}
 	},
 	typography: {

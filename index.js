@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {ThemeProvider} from '@material-ui/core';
+import {ThemeProvider, CssBaseline} from '@material-ui/core';
 import theme from './assets/theme';
+import {blue} from './assets/colors/blue';
 import Container from './components/Container';
 
 const App = () => (
 	<div className="App">
 		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<Container />
 		</ThemeProvider>
 	</div>

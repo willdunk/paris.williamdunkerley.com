@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Container, Card, Typography} from "@material-ui/core";
 import Drawer from "../Drawer";
+import {blue} from '../../assets/colors/blue';
 
 const ContainerWD = (props) => {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
