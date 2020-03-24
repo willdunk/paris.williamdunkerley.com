@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
 import theme from './assets/theme';
-import {blue} from './assets/colors/blue';
 import Container from './components/Container';
 
 const App = () => (
