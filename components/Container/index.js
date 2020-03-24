@@ -3,13 +3,17 @@ import {Container, Grid} from "@material-ui/core";
 import Drawer from "../Drawer";
 import MainContent from '../MainContent';
 import MainAvatar from '../MainAvatar';
-import {blue} from '../../assets/colors/blue';
+import {useStyles} from './styles';
 
 const ContainerWD = (props) => {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+	const classes = useStyles();
+
 	return (
-		<Container fixed>
+		<Container
+			maxWidth="md"
+		>
 			<Drawer
 				key={1}
 				isOpen={isDrawerOpen}
@@ -26,6 +30,7 @@ const ContainerWD = (props) => {
 				<Grid
 					item
 					xs={12}
+					classes={{root: classes.cardGridRoot}}
 				>
 					<MainContent />
 				</Grid>
