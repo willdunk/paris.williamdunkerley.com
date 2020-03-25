@@ -9,11 +9,13 @@
 		"@material-ui/core": "^4.9.5",
 		"assemble": "~0.3.11",
 		"autoprefixer": "^7.2.1",
+		"babel-polyfill": "^6.26.0",
 		"babel-preset-react-app": "^3.1.0",
 		"grunt": "~0.4.0",
 		"parcel-bundler": "latest",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
+		"rss-parser": "^3.7.6",
 		"styles": "^0.2.1"
 	},
 	"postcss": {
@@ -33,5 +35,8 @@
 	"devDependencies": {
 		"babel-core": "^6.26.3",
 		"cross-env": "^5.1.1"
-	}
+	},
+	"browserslist": [
+		"last 1 Chrome versions"
+	]
 }

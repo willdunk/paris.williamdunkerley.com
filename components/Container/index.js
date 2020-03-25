@@ -3,6 +3,7 @@ import {Container, Grid} from "@material-ui/core";
 import Drawer from "../Drawer";
 import MainContent from '../MainContent';
 import MainAvatar from '../MainAvatar';
+import ReviewFeed from '../ReviewFeed';
 import {useStyles} from './styles';
 
 const ContainerWD = (props) => {
@@ -33,6 +34,12 @@ const ContainerWD = (props) => {
 					classes={{root: classes.cardGridRoot}}
 				>
 					<MainContent />
+				</Grid>
+				<Grid
+					item
+					xs={12}
+				>
+					<ReviewFeed />
 				</Grid>
 			</Grid>
 		</Container>
