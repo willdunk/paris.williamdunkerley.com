@@ -11,21 +11,21 @@ node {
 		sh 'yarn build'
 	}
 	stage('Deploy to paris') {
-		when {env.BRANCH_NAME "master"}
+		when {branch "master"}
 		steps {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/paris.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
 	}
 	stage('Deploy to vienna') {
-		when {env.BRANCH_NAME "release/*"}
+		when {branch "release/*"}
 		steps {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/vienna.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
 	}
 	stage('Deploy to perth') {
-		when {env.BRANCH_NAME "feature/*"}
+		when {branch "feature/*"}
 		steps {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/perth.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
