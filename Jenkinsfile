@@ -12,7 +12,7 @@ node {
 	}
 	stage('Deploy') {
 		if (env.BRANCH_NAME == "master") {
-			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/paris.williamdunkerley.com'
+			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/vienna.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
 		if (env.BRANCH_NAME.contains("release/")) {
