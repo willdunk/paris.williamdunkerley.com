@@ -10,23 +10,16 @@ node {
 		sh 'yarn install'
 		sh 'yarn build'
 	}
-	stage('Deploy to paris') {
-		when {branch "master"}
-		steps {
+	stage('Deploy') {
+		if (env.BRANCH_NAME == "master") {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/paris.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
-	}
-	stage('Deploy to vienna') {
-		when {branch "release/*"}
-		steps {
+		if (env.BRANCH_NAME,contains("release/")) {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/vienna.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
-	}
-	stage('Deploy to perth') {
-		when {branch "feature/*"}
-		steps {
+		if (env.BRANCH_NAME,contains("feature/")) {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/perth.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
