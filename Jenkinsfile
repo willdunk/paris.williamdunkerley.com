@@ -19,7 +19,7 @@ node {
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/vienna.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
-		if (env.BRANCH_NAME,contains("feature/")) {
+		if (env.BRANCH_NAME,contains("feature/")) { 
 			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/perth.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
