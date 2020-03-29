@@ -1,12 +1,34 @@
 #!/usr/bin/env groovy
 
 node {
-	stage('Build') {
+	stage('Checkout') {
 		checkout scm
 		sh 'git submodule update --init'
-		echo "My branch name is: ${env.BRANCH_NAME}"
+		echo "Branch Name: ${env.BRANCH_NAME}"
 	}
-	stage('Deploy') {
-		echo "My branch name is: ${env.BRANCH_NAME}"
+	stage('Build') {
+		sh 'yarn install'
+		sh 'yarn build'
+	}
+	stage('Deploy to paris') {
+		when {env.BRANCH_NAME "master"}
+		steps {
+			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/paris.williamdunkerley.com'
+			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
+		}
+	}
+	stage('Deploy to vienna') {
+		when {env.BRANCH_NAME "release/*"}
+		steps {
+			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/vienna.williamdunkerley.com'
+			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
+		}
+	}
+	stage('Deploy to perth') {
+		when {env.BRANCH_NAME "feature/*"}
+		steps {
+			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/perth.williamdunkerley.com'
+			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
+		}
 	}
 }
