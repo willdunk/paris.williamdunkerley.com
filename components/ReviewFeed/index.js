@@ -1,39 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from '@material-ui/core/Card';
-import Parser from 'rss-parser';
+import {useSelector, useDispatch} from 'react-redux';
+import {actions} from '../../actions';
 
-class ReviewFeed extends React.Component {
-	constructor() {
-		super();
-		this.state = {reviews: []};
-	}
+const ReviewFeed = (props) => {
+	const {feed, feedLoading} = useSelector(state => ({...state.letterboxd}));
+	const dispatch = useDispatch();
 
-	async componentDidMount() {
-		const parser = new Parser();
-		const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
-		let feed = await parser.parseURL(CORS_PROXY + 'https://letterboxd.com/hahaveryfun/rss');
-		let sanitizedItems = feed.items.filter((item) => {
-			return item.guid.includes('letterboxd-review');
-		});
-		this.setState({reviews: sanitizedItems},);
-	}
+	useEffect(() => {
+		dispatch(actions.getFeed());
+	}, []);
 
-	render() {
-		console.log(this.state.reviews);
-		return (
-			this.state.reviews.map((review, i) => {
-				return (
-					<Card
-						style={{ marginTop: 8, }}
-					>
-						{review.title}
-						<br />
-						{review.contentSnippet}
-					</Card>
-				);
-			})
-		)
-	}
+	const items = feed.items || [];
+	const reviews = items.filter((item) => {
+		return item.guid.includes('letterboxd-review');
+	});
+	
+	return reviews.map((review, i) => (
+		<Card
+			key={i}
+			style={{ marginTop: 8, }}
+		>
+			{review.title}
+ 			<br />
+ 			{review.contentSnippet}
+		</Card>
+	));
 }
 
 export default ReviewFeed;
