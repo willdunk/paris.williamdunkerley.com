@@ -28,9 +28,11 @@ const getFeed = () => {
 		return parser.parseURL(CORS_PROXY + 'https://letterboxd.com/hahaveryfun/rss')
 			.then((response) => {
 				dispatch(getFeedSuccess(response));
+				return response;
 			})
 			.catch((error) => {
 				dispatch(getFeedFailure(undefined));
+				return error;
 			});
 	}
 }
