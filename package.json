@@ -7,16 +7,16 @@
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.5",
-		"assemble": "~0.3.11",
 		"autoprefixer": "^7.2.1",
-		"babel-polyfill": "^6.26.0",
 		"babel-preset-react-app": "^3.1.0",
-		"grunt": "~0.4.0",
+		"html-react-parser": "^0.10.3",
 		"parcel-bundler": "latest",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
-		"rss-parser": "^3.7.6",
-		"styles": "^0.2.1"
+		"react-redux": "^7.2.0",
+		"redux": "^4.0.5",
+		"redux-thunk": "^2.3.0",
+		"rss-parser": "^3.7.6"
 	},
 	"postcss": {
 		"modules": false,
@@ -35,8 +35,5 @@
 	"devDependencies": {
 		"babel-core": "^6.26.3",
 		"cross-env": "^5.1.1"
-	},
-	"browserslist": [
-		"last 1 Chrome versions"
-	]
+	}
 }
