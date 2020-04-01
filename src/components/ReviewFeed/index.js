@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
-import Card from '@material-ui/core/Card';
+import {Card, Grid} from '@material-ui/core';
 import {useSelector, useDispatch} from 'react-redux';
 import {actions} from '../../actions';
+import Loading from '../Loading';
+import ReviewCard from '../ReviewCard';
 
 const ReviewFeed = (props) => {
 	const {feed, feedLoading} = useSelector(state => ({...state.letterboxd}));
@@ -15,17 +17,27 @@ const ReviewFeed = (props) => {
 	const reviews = items.filter((item) => {
 		return item.guid.includes('letterboxd-review');
 	});
-	
-	return reviews.map((review, i) => (
-		<Card
-			key={i}
-			style={{ marginTop: 8, }}
+
+	const renderBody = () => {
+		return (feedLoading ? (
+			<Loading style={{ width: 100, height: 'auto' }} />
+		) : (
+			reviews.map((review, i) => (<ReviewCard key={i} {...review} />))
+		));
+	}
+
+	return (
+		<Grid
+			container
+			justify={"center"}
 		>
-			{review.title}
- 			<br />
- 			{review.contentSnippet}
-		</Card>
-	));
+			<Grid
+				item
+			>
+				{renderBody()}
+			</Grid>
+		</Grid>
+	)
 }
 
 export default ReviewFeed;

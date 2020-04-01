@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import theme from './assets/theme';
+import theme from '../assets/theme';
 import Container from './components/Container';
 import {Provider} from 'react-redux';
 import store from './store';
