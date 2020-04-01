@@ -1,4 +1,5 @@
 import Parser from 'rss-parser';
+import {createError} from '../utils';
 
 export const actionTypes = {
 	GET_FEED_BEGIN: "GET_FEED_BEGIN",
@@ -25,13 +26,13 @@ const getFeed = () => {
 		dispatch(getFeedBegin());
 		const parser = new Parser();
 		const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
-		return parser.parseURL(CORS_PROXY + 'https://letterboxd.com/hahaveryfun/rss')
+		return parser.parseURL(`${CORS_PROXY}https://letterboxd.com/hahaveryfun/rss`)
 			.then((response) => {
 				dispatch(getFeedSuccess(response));
 				return response;
 			})
 			.catch((error) => {
-				dispatch(getFeedFailure(undefined));
+				dispatch(getFeedFailure(createError(error)));
 				return error;
 			});
 	}

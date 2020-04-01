@@ -6,7 +6,7 @@ import Loading from '../Loading';
 import ReviewCard from '../ReviewCard';
 
 const ReviewFeed = (props) => {
-	const {feed, feedLoading} = useSelector(state => ({...state.letterboxd}));
+	const {feed, feedLoading, feedError} = useSelector(state => ({...state.letterboxd}));
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -19,6 +19,9 @@ const ReviewFeed = (props) => {
 	});
 
 	const renderBody = () => {
+		if (feedError) {
+			return (<span>{feedError.message || "There was an error"}</span>)
+		}
 		return (feedLoading ? (
 			<Loading style={{ width: 100, height: 'auto' }} />
 		) : (
