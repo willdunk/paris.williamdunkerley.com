@@ -16,3 +16,7 @@ The CI/CD deployment pipeline is handled by a Jenkins instance that lives at `ht
 3. Create a Pull Request and link the original issue within it, give sufficient detail in the summary
 4. Wait for checks to pass, and merge back into `release`
 5. Merge into `master` when ready to put the most recent version into production
+
+## Git Ediquette
+
+This link is provided, but will be updated later. [link](https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines)

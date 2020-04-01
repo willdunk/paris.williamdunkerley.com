@@ -37,7 +37,7 @@ const ContainerWD = (props) => {
 				</Grid>
 				<Grid
 					item
-					xs={12}
+					xs={8}
 				>
 					<ReviewFeed />
 				</Grid>
