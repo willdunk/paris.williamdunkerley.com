@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 node {
-	stage('Clean Work Space') {
+	stage('Clean Workspace') {
 		cleanWs()
 		sh 'pwd'
 		sh 'ls'
@@ -16,16 +16,18 @@ node {
 		sh 'yarn build'
 	}
 	stage('Deploy') {
+		String location = null;
 		if (env.BRANCH_NAME == "master") {
-			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/paris.williamdunkerley.com'
-			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
+			location = 'berlin';
 		}
 		if (env.BRANCH_NAME == "release") {
-			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/vienna.williamdunkerley.com'
-			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
+			location = 'vienna';
 		}
 		if (env.BRANCH_NAME.contains("feature/")) {
-			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/perth.williamdunkerley.com'
+			location = 'perth';
+		}
+		if (location != null) {
+			sh 'scp -r ./dist/* paris.williamdunkerley.com:/home/jenkins/'+location+'.williamdunkerley.com'
 			sh 'ssh paris.williamdunkerley.com \'sudo /usr/sbin/service nginx restart\''
 		}
 	}
