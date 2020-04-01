@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import theme from '../assets/theme';
-import Container from './components/Container';
+import theme from './assets/theme';
+import Container from './src/components/Container';
 import {Provider} from 'react-redux';
-import store from './store';
+import store from './src/store';
 
 const App = () => (
 	<div className="App">
