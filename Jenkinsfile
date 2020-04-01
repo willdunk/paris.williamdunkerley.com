@@ -1,6 +1,11 @@
 #!/usr/bin/env groovy
 
 node {
+	stage('Clean Work Space') {
+		cleanWs()
+		sh 'pwd'
+		sh 'ls'
+	}
 	stage('Checkout') {
 		checkout scm
 		sh 'git submodule update --init'
