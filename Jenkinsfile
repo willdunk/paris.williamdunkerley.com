@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 node {
-	stage('Clean Work Space') {
+	stage('Clean Workspace') {
 		cleanWs()
 		sh 'pwd'
 		sh 'ls'
