@@ -35,9 +35,11 @@ const getFeed = () => {
 			.then((response) => {
 				const reviews = response.items.filter((item) => item.guid.includes('letterboxd-review'));
 				const sanitizedReviews = reviews.map((review) => {
+					const x = parse5.parse(review.content).childNodes[0].childNodes[1];
+					x.childNodes.splice(0,1);
 					return {
 						title: review.title,
-						content: review.content,
+						content: parse5.serialize(x),
 						movieListing: review.link.replace(response.link, "https://letterboxd.com/"),
 						backdropImage: undefined,
 					};
