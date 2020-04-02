@@ -4,16 +4,16 @@ import parse from 'html-react-parser';
 import {useStyles} from './styles';
 
 const ReviewCard = (props) => {
-	const {title, content} = props || {};
+	const { title, content, backdropImage } = props || {};
 	const classes = useStyles();
-	
-	console.log(props);
 
 	return (
 		<Card
 			classes={{root: classes.root}}
 		>
 			{title}
+			<br />
+			<img src={backdropImage} />
 			<br />
 			{parse(content)}
 		</Card>
