@@ -20,10 +20,14 @@ const ReviewCard = (props) => {
 			<CardContent
 				classes={{root: classes.cardContentRoot}}
 			>
-				<Typography variant="h6">
+				<Typography
+					variant="h6"
+				>
 					{title}
 				</Typography>
-				<Typography>
+				<Typography
+					display="inline"
+				>
 					{parse(content)}
 				</Typography>
 			</CardContent>

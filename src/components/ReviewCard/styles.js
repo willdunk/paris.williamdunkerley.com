@@ -6,5 +6,12 @@ export const useStyles = makeStyles(theme => ({
 	},
 	cardContentRoot: {
 		padding: theme.spacing(1),
+		"&:last-child": {
+			paddingBottom: theme.spacing(1),
+		},
+		"& p:last-of-type": {
+			marginBottom: 0,
+		}
+
 	},
 }));
