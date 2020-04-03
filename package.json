@@ -3,14 +3,22 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "cross-env NODE_ENV=development parcel index.html ",
-		"build": "cross-env NODE_ENV=production parcel build index.html --no-minify --public-url ./"
+		"build": "cross-env NODE_ENV=production parcel build index.html --no-minify --public-url ./",
+		"test": "yarn run jest --config jest.config.js"
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.5",
+		"@babel/preset-env": "latest",
+		"@babel/preset-react": "latest",
 		"autoprefixer": "^7.2.1",
 		"axios": "^0.19.2",
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-react": "^6.24.1",
 		"babel-preset-react-app": "^3.1.0",
+		"enzyme": "^3.11.0",
+		"enzyme-adapter-react-16": "^1.15.2",
 		"html-react-parser": "^0.10.3",
+		"jest": "^25.2.6",
 		"parcel-bundler": "latest",
 		"parse5": "^5.1.1",
 		"react": "^16.2.0",
