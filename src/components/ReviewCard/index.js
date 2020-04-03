@@ -1,21 +1,36 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
+import {Card, CardContent, CardMedia, Typography} from '@material-ui/core';
 import parse from 'html-react-parser';
 import {useStyles} from './styles';
 
 const ReviewCard = (props) => {
-	const {title, content} = props || {};
+	const { title, content, backdropImage } = props || {};
 	const classes = useStyles();
-	
-	console.log(props);
 
 	return (
 		<Card
 			classes={{root: classes.root}}
 		>
-			{title}
-			<br />
-			{parse(content)}
+			<CardMedia
+				component={"img"}
+				src={backdropImage}
+				alt={title}
+				classes={{root: classes.cardMediaRoot}}
+			/>
+			<CardContent
+				classes={{root: classes.cardContentRoot}}
+			>
+				<Typography
+					variant="h6"
+				>
+					{title}
+				</Typography>
+				<Typography
+					display="inline"
+				>
+					{parse(content)}
+				</Typography>
+			</CardContent>
 		</Card>
 	);
 }

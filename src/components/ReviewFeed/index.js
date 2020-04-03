@@ -13,11 +13,6 @@ const ReviewFeed = (props) => {
 		dispatch(actions.getFeed());
 	}, []);
 
-	const items = feed.items || [];
-	const reviews = items.filter((item) => {
-		return item.guid.includes('letterboxd-review');
-	});
-
 	const renderBody = () => {
 		if (feedError) {
 			return (<span>{feedError.message || "There was an error"}</span>)
@@ -25,7 +20,7 @@ const ReviewFeed = (props) => {
 		return (feedLoading ? (
 			<Loading style={{ width: 100, height: 'auto' }} />
 		) : (
-			reviews.map((review, i) => (<ReviewCard key={i} {...review} />))
+			feed.map((review, i) => (<ReviewCard key={i} {...review} />))
 		));
 	}
 
