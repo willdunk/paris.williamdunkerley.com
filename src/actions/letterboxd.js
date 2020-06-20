@@ -29,50 +29,20 @@ const getFeedFailure = (payload) => ({
 const getFeed = () => {
 	return (dispatch) => {
 		dispatch(getFeedBegin());
-		const parser = new Parser();
-		const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
-		return parser.parseURL(`${CORS_PROXY}https://letterboxd.com/hahaveryfun/rss`)
+		return axios.get("https://prague.williamdunkerley.com/review")
 			.then((response) => {
-				const reviews = response.items.filter((item) => item.guid.includes('letterboxd-review'));
-				const sanitizedReviews = reviews.map((review) => {
-					const x = parse5.parse(review.content).childNodes[0].childNodes[1];
-					x.childNodes.splice(0,1);
-					return {
-						title: review.title,
-						content: parse5.serialize(x),
-						movieListing: review.link.replace(response.link, "https://letterboxd.com/"),
-						backdropImage: undefined,
-					};
-				});
-				return Promise.all(sanitizedReviews.map((review) => {
-					return axios.get(`${CORS_PROXY}${review.movieListing}`)
-						.then(function (response) {
-							const a = parse5.parse(response.data).childNodes.find((el) => el.nodeName === "html");
-							const b = a.childNodes.find((el) => el.nodeName === "body");
-							const c = b.childNodes.find((el) => el.nodeName === "div");
-							const d = c.childNodes.find((el) => el.nodeName === "div");
-							const e = d.attrs.find((attr) => attr.name === "data-backdrop2x" && attr.value !== "backdrop");
-							review.backdropImage = e.value;
-							return review;
-						})
-						.catch(function (error) {
-							dispatch(getFeedFailure(createError(error)));
-							return error;
-						});
-				}))
-				.then((responses) => {
-					dispatch(getFeedSuccess(responses));
-					return responses;
-				})
-				.catch((error) => {
-					dispatch(getFeedFailure(createError(error)));
-					return error;
-				});
+				dispatch(getFeedSuccess(response.data.map((review) => ({
+					title: review.filmTitle,
+					content: review.content,
+					movieListing: review.link,
+					backdropImage: review.backdrop,
+				}))));
+				return response;
 			})
 			.catch((error) => {
 				dispatch(getFeedFailure(createError(error)));
 				return error;
-			});
+			})
 	}
 }
 
