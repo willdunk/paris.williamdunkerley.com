@@ -29,7 +29,7 @@ const getFeedFailure = (payload) => ({
 const getFeed = () => {
 	return (dispatch) => {
 		dispatch(getFeedBegin());
-		return axios.get("https://prague.williamdunkerley.com/review")
+		return axios.get(`https://${process.env.API_SUBDOMAIN}.williamdunkerley.com/review`)
 			.then((response) => {
 				dispatch(getFeedSuccess(response.data.map((review) => ({
 					title: review.filmTitle,

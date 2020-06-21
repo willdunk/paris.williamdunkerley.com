@@ -7,8 +7,6 @@ const copy = "I go by many names, including Will, Eric, Slam, and Dunks just to 
 const MainContent = (props) => {
 	const classes = useStyles();
 
-	console.log(process.env.API_SUBDOMAIN)
-
 	return (
 		<Card
 			classes={{root: classes.root}}
