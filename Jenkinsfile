@@ -13,7 +13,15 @@ node {
 	}
 	stage('Build') {
 		sh 'yarn install'
-		sh 'yarn build'
+		if (env.BRANCH_NAME == "master") {
+			sh 'yarn build:prod'
+		}
+		if (env.BRANCH_NAME == "release") {
+			sh 'yarn build:qa'
+		}
+		if (env.BRANCH_NAME.contains("feature/")) {
+			sh 'yarn build:dev'
+		}
 	}
 	stage('Deploy') {
 		String location = null;
