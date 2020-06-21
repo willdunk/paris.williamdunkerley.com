@@ -2,14 +2,18 @@
 	"name": "fronttest",
 	"license": "MIT",
 	"scripts": {
-		"start": "cross-env NODE_ENV=development parcel index.html ",
-		"build": "cross-env NODE_ENV=production parcel build index.html --no-minify --public-url ./"
+		"start": "cross-env API_SUBDOMAIN=prague parcel index.html ",
+		"build:dev": "cross-env API_SUBDOMAIN=prague parcel build index.html --no-minify --public-url ./",
+		"build:qa": "cross-env API_SUBDOMAIN=santiago parcel build index.html --no-minify --public-url ./",
+		"build:prod": "cross-env API_SUBDOMAIN=amsterdam parcel build index.html --no-minify --public-url ./",
+		"build": "build:prod"
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.5",
 		"autoprefixer": "^7.2.1",
 		"axios": "^0.19.2",
 		"babel-preset-react-app": "^3.1.0",
+		"dotenv": "^8.2.0",
 		"html-react-parser": "^0.10.3",
 		"parcel-bundler": "latest",
 		"parse5": "^5.1.1",

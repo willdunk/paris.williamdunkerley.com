@@ -6,7 +6,7 @@ const copy = "I go by many names, including Will, Eric, Slam, and Dunks just to 
 
 const MainContent = (props) => {
 	const classes = useStyles();
-	
+
 	return (
 		<Card
 			classes={{root: classes.root}}
