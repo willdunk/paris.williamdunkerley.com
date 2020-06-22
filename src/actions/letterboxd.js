@@ -32,10 +32,13 @@ const getFeed = () => {
 		return axios.get(`https://${process.env.API_SUBDOMAIN}.williamdunkerley.com/review`)
 			.then((response) => {
 				dispatch(getFeedSuccess(response.data.map((review) => ({
-					title: review.filmTitle,
+					reviewId: review.review_id,
+					title: review.title,
+					rating: review.rating,
+					reviewLink: review.review_link,
+					movieLink: review.movie_link,
+					backdropImage: review.banner_image_link,
 					content: review.content,
-					movieListing: review.link,
-					backdropImage: review.backdrop,
 				}))));
 				return response;
 			})
