@@ -2,10 +2,10 @@
 	"name": "fronttest",
 	"license": "MIT",
 	"scripts": {
-		"start": "cross-env API_SUBDOMAIN=prague parcel index.html ",
-		"build:dev": "cross-env API_SUBDOMAIN=prague parcel build index.html --no-minify --public-url ./",
-		"build:qa": "cross-env API_SUBDOMAIN=santiago parcel build index.html --no-minify --public-url ./",
-		"build:prod": "cross-env API_SUBDOMAIN=amsterdam parcel build index.html --no-minify --public-url ./",
+		"start": "cross-env API_BASE=http://localhost:5000 parcel index.html ",
+		"build:dev": "cross-env API_BASE=https://prague.williamdunkerley.com parcel build index.html --no-minify --public-url ./",
+		"build:qa": "cross-env API_BASE=https://santiago.williamdunkerley.com parcel build index.html --no-minify --public-url ./",
+		"build:prod": "cross-env API_BASE=https://amsterdam.williamdunkerley.com parcel build index.html --no-minify --public-url ./",
 		"build": "build:prod"
 	},
 	"dependencies": {

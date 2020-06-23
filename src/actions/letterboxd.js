@@ -29,13 +29,24 @@ const getFeedFailure = (payload) => ({
 const getFeed = () => {
 	return (dispatch) => {
 		dispatch(getFeedBegin());
-		return axios.get(`https://${process.env.API_SUBDOMAIN}.williamdunkerley.com/review`)
+		return axios.get(`${process.env.API_BASE}/review`, {
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+			},
+		})
 			.then((response) => {
 				dispatch(getFeedSuccess(response.data.map((review) => ({
-					title: review.filmTitle,
+					reviewId: review.review_id,
+					title: review.title,
+					rating: review.rating,
+					reviewLink: review.review_link,
+					movieLink: review.movie_link,
+					backdropImage: review.banner_image_link,
 					content: review.content,
-					movieListing: review.link,
-					backdropImage: review.backdrop,
+					publishedDate: new Date(review.published_date),
+					watchedDate: new Date(review.watched_date),
 				}))));
 				return response;
 			})
