@@ -20,8 +20,9 @@ const ReviewFeed = (props) => {
 		return (feedLoading ? (
 			<Loading style={{ width: 100, height: 'auto' }} />
 		) : (
-			feed.map((review, i) => (<ReviewCard {... {key: i, ...review}} />))
-		));
+			feed.sort((a, b) => b.publishedDate - a.publishedDate)
+			).map((review, i) => <ReviewCard {... {key: i, ...review}} />)
+		);
 	}
 
 	return (
