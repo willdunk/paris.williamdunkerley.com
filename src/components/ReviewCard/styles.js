@@ -14,11 +14,9 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 		}
 	},
 	cardMedia: {
-		height: 'auto',
 		width: '100%',
 		background: `linear-gradient(transparent, white), url(${backdropImage})`,
 		backgroundSize: 'contain',
-		backgroundPosition: 'center',
 		backgroundRepeat: 'no-repeat',
 	},
 	backdropImageFrame: {

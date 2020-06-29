@@ -1,29 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 import {Container, Grid} from "@material-ui/core";
-import Drawer from "../Drawer";
-import MainContent from '../MainContent';
-import MainAvatar from '../MainAvatar';
-import ReviewFeed from '../ReviewFeed';
+import MainContent from '../../Main/MainContent';
+import MainAvatar from '../../Main/MainAvatar';
+import ReviewFeed from '../../ReviewFeed';
 import {useStyles} from './styles';
 
 const ContainerWD = (props) => {
-	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
 	const classes = useStyles();
 
 	return (
 		<Container
+			classes={{root: classes.root}}
 			maxWidth="md"
 		>
-			<Drawer
-				key={1}
-				isOpen={isDrawerOpen}
-			/>
 			<Grid
 				container
 				justify="center"
 			>
-				<Grid 
+				<Grid
 					item
 				>
 					<MainAvatar />
@@ -31,7 +25,7 @@ const ContainerWD = (props) => {
 				<Grid
 					item
 					xs={12}
-					classes={{root: classes.cardGridRoot}}
+					classes={{ root: classes.cardGridRoot }}
 				>
 					<MainContent />
 				</Grid>
