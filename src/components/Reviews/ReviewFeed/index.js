@@ -34,11 +34,16 @@ const ReviewFeed = (props) => {
 		>
 			<Grid
 				item
+				container
 				xs={12}
 				md={8}
-				classes={{root:classes.cardsContainer}}
+				justify={'center'}
 			>
-				{renderBody()}
+				<Grid
+					item
+				>
+					{renderBody()}
+				</Grid>
 			</Grid>
 		</Grid>
 	)
