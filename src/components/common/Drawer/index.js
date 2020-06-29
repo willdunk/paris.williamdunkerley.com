@@ -36,6 +36,7 @@ const Drawer = (props) => {
 			className={classes.bar}
 		>
 			<IconButton
+				color='primary'
 				onClick={() => setIsOpen(true)}
 			>
 				<MenuIcon />

@@ -4,6 +4,7 @@ import {Drawer, Container} from '../../common';
 import {useStyles} from './styles';
 
 const Layout = (props) => {
+	const {children} = props;
 	const classes = useStyles();
 	
 	return (
@@ -20,7 +21,7 @@ const Layout = (props) => {
 				item
 				classes={{ root: classes.body }}
 			>
-				<Container />
+				<Container {...{children}}/>
 			</Grid>
 		</Grid>
 	);
