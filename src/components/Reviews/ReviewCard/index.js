@@ -1,10 +1,16 @@
 import React from 'react';
-import {Card, CardContent, CardMedia, Typography} from '@material-ui/core';
+import {
+	Card,
+	CardContent,
+	CardMedia,
+	Typography,
+	Zoom
+} from '@material-ui/core';
 import parse from 'html-react-parser';
 import {useStyles} from './styles';
 
 const ReviewCard = (props) => {
-	const { title, content, backdropImage, rating} = props || {};
+	const {title, content, backdropImage, rating, feedLoading} = props || {};
 	const classes = useStyles(backdropImage)();
 
 	const parseOptions = {
@@ -12,36 +18,40 @@ const ReviewCard = (props) => {
 	};
 
 	return (
-		<Card
-			classes={{root: classes.root}}
+		<Zoom
+			in={!feedLoading}
 		>
-			<CardMedia
-				classes={{root: classes.cardMedia}}
-				component="div"
+			<Card
+				classes={{ root: classes.root }}
 			>
-				<img
-					className={classes.backdropImageFrame}
-					alt={title}
-					src={backdropImage}
-				/>
-			</CardMedia>
-			<CardContent
-				classes={{root: classes.cardContent}}
-			>
-				<Typography
-					variant="h6"
-					classes={{root: classes.title}}
-				>
-					{title} - {rating}/10
-				</Typography>
-				<Typography
-					display="inline"
+				<CardMedia
+					classes={{ root: classes.cardMedia }}
 					component="div"
 				>
-					{parse(content, parseOptions)}
+					<img
+						className={classes.backdropImageFrame}
+						alt={title}
+						src={backdropImage}
+					/>
+				</CardMedia>
+				<CardContent
+					classes={{ root: classes.cardContent }}
+				>
+					<Typography
+						variant="h6"
+						classes={{ root: classes.title }}
+					>
+						{title} - {rating}/10
 				</Typography>
-			</CardContent>
-		</Card>
+					<Typography
+						display="inline"
+						component="div"
+					>
+						{parse(content, parseOptions)}
+					</Typography>
+				</CardContent>
+			</Card>
+		</Zoom>
 	);
 }
 

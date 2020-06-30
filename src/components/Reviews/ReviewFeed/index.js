@@ -23,7 +23,7 @@ const ReviewFeed = (props) => {
 			<Loading className={`${classes.loadingImg}`}/>
 		) : (
 			feed.sort((a, b) => b.publishedDate - a.publishedDate)
-			).map((review, i) => <ReviewCard {... {key: i, ...review}} />)
+			).map((review, i) => <ReviewCard {... {key: i, feedLoading, ...review}} />)
 		);
 	}
 
