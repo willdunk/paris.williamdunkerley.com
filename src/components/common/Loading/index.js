@@ -1,5 +1,5 @@
 import React from 'react';
-import loadinggif from '../../../assets/static/loading.gif';
+import loadinggif from '../../../../assets/static/loading.gif';
 
 const Loading = (props) => {
 	return (

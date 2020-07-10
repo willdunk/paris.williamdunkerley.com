@@ -1,8 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
-	root: {
-		padding: theme.spacing(1),
-		paddingTop: theme.spacing(5),
+	cardsContainer: {
+		textAlign: 'center',
+	},
+	loadingImg: {
+		width: 100,
+		height: 'auto',
 	}
 }));
