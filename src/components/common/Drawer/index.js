@@ -12,7 +12,8 @@ import {useStyles} from './styles';
 import {
 	Menu as MenuIcon,
 	Home as HomeIcon,
-	Comment as CommentIcon
+	Comment as CommentIcon,
+	Mic as MicIcon,
 } from '@material-ui/icons';
 
 const items = [
@@ -25,7 +26,12 @@ const items = [
 		link: "/reviews",
 		text: "Reviews",
 		icon: <CommentIcon/>,
-	}
+	},
+	{
+		link: '/podcasts',
+		text: 'Podcasts',
+		icon: <MicIcon />
+	},
 ]
 
 const Drawer = (props) => {

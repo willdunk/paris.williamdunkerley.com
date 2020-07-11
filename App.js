@@ -9,7 +9,7 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import {Main, Reviews} from './src/pages';
+import {Main, Reviews, Podcasts} from './src/pages';
 
 const App = () => (
 	<div className="App">
@@ -26,6 +26,9 @@ const App = () => (
 						</Route>
 						<Route path="/travel">
 							<span>There</span>
+						</Route>
+						<Route path="/podcasts">
+							<Podcasts />
 						</Route>
 					</Switch>
 				</Router>
