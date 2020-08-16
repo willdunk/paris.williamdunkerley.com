@@ -1,3 +1,4 @@
 import PodcastFeed from './PodcastFeed';
+import NewShowForm from './NewShowForm';
 
-export {PodcastFeed};
+export {PodcastFeed, NewShowForm};
