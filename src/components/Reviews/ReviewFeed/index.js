@@ -5,11 +5,13 @@ import {actions} from '../../../actions';
 import {Loading} from '../../common';
 import {ReviewCard} from '../../Reviews';
 import {useStyles} from './styles';
+import {useParams} from 'react-router-dom';
 
 const ReviewFeed = (props) => {
 	const {feed, feedLoading, feedError} = useSelector(state => ({...state.letterboxd}));
 	const dispatch = useDispatch();
 	const classes = useStyles();
+	const {reviewId} = useParams();
 
 	useEffect(() => {
 		dispatch(actions.getFeed());
@@ -19,11 +21,14 @@ const ReviewFeed = (props) => {
 		if (feedError) {
 			return (<span>{feedError.message || "There was an error"}</span>)
 		}
-		return (feedLoading ? (
-			<Loading className={`${classes.loadingImg}`}/>
-		) : (
-			feed.sort((a, b) => b.publishedDate - a.publishedDate)
-			).map((review, i) => <ReviewCard {... {key: i, feedLoading, ...review}} />)
+		return (
+			feedLoading ? (
+				<Loading className={`${classes.loadingImg}`}/>
+			) : (
+				feed.sort((a, b) => b.publishedDate - a.publishedDate)
+				.filter((review) => reviewId===undefined || review.reviewId===reviewId)
+				.map((review, key) => <Grid item {...{ key, xs:4 }}><ReviewCard {... { feedLoading, ...review }} /></Grid>)
+			)
 		);
 	}
 
@@ -36,14 +41,10 @@ const ReviewFeed = (props) => {
 				item
 				container
 				xs={12}
-				md={8}
 				justify={'center'}
+				spacing={2}
 			>
-				<Grid
-					item
-				>
-					{renderBody()}
-				</Grid>
+				{renderBody()}
 			</Grid>
 		</Grid>
 	)

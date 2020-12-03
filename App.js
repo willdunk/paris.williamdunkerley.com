@@ -7,7 +7,6 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
 } from "react-router-dom";
 import {Main, Reviews} from './src/pages';
 
@@ -21,7 +20,7 @@ const App = () => (
 						<Route exact path="/">
 							<Main/>
 						</Route>
-						<Route path="/reviews">
+						<Route path={["/reviews/:reviewId", "/reviews"]}>
 							<Reviews/>
 						</Route>
 						<Route path="/travel">
