@@ -27,7 +27,7 @@ const ReviewFeed = (props) => {
 			) : (
 				feed.sort((a, b) => b.publishedDate - a.publishedDate)
 				.filter((review) => reviewId===undefined || review.reviewId===reviewId)
-				.map((review, key) => <Grid item {...{ key, xs:4 }}><ReviewCard {... { feedLoading, ...review }} /></Grid>)
+				.map((review, key) => <Grid item {...{ key, xs:12, sm:6, md:4 }}><ReviewCard {... { feedLoading, ...review }} /></Grid>)
 			)
 		);
 	}
