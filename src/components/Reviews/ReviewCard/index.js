@@ -4,7 +4,7 @@ import {
 	CardContent,
 	CardMedia,
 	Typography,
-	Zoom,
+	Slide,
 } from '@material-ui/core';
 import {Rating} from '@material-ui/lab';
 import parse from 'html-react-parser';
@@ -19,7 +19,7 @@ const ReviewCard = (props) => {
 	};
 
 	return (
-		<Zoom
+		<Slide
 			in={!feedLoading}
 		>
 			<Card>
@@ -39,7 +39,7 @@ const ReviewCard = (props) => {
 					<Typography
 						classes={{ root: classes.rating }}
 					>
-						<Rating {...{ value: rating / 2, max: 5, precision: 0.5, readOnly: true, }} />
+						<Rating {...{ value: rating / 2, max: 5, precision: 0.5, readOnly: true, size: 'small'}} />
 					</Typography>
 					<Typography
 						variant="h6"
@@ -56,7 +56,7 @@ const ReviewCard = (props) => {
 					</Typography>
 				</CardContent>
 			</Card>
-		</Zoom>
+		</Slide>
 	);
 }
 
