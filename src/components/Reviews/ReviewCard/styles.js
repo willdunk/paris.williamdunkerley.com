@@ -1,6 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = (backdropImage) => makeStyles(theme => ({
+	card: {
+		cursor: 'pointer',
+		'&:hover .cardImage': {
+			transform: `scale(${1.05})`,
+		},
+	},
 	cardContent: {
 		padding: theme.spacing(1),
 		"&:last-child": {
@@ -9,13 +15,14 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 		"& p:last-of-type": {
 			marginBottom: 0,
 		},
-		marginTop: theme.spacing(-6),
+		backgroundColor: 'white',
 	},
 	cardMedia: {
-		width: '101%',
-		background: `linear-gradient(transparent, white), url(${backdropImage})`,
+		width: '100%',
+		background: `url(${backdropImage})`,
 		backgroundSize: 'contain',
 		backgroundRepeat: 'no-repeat',
+		transition: `all ${.5}s`,
 	},
 	backdropImageFrame: {
 		width: '100%',
@@ -29,6 +36,7 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 		display: '-webkit-box',
 		'-webkit-line-clamp': 1,
 		'-webkit-box-orient': 'vertical',
+		zIndex: 1,
 	},
 	rating: {
 		textAlign: 'center',

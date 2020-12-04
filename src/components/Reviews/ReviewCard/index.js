@@ -22,9 +22,11 @@ const ReviewCard = (props) => {
 		<Slide
 			in={!feedLoading}
 		>
-			<Card>
+			<Card
+				classes={{root: classes.card}}
+			>
 				<CardMedia
-					classes={{ root: classes.cardMedia }}
+					classes={{ root: `${classes.cardMedia} ${"cardImage"}` }}
 					component="div"
 				>
 					<img
