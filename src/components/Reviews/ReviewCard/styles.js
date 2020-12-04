@@ -18,7 +18,7 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 		backgroundColor: 'white',
 	},
 	cardMedia: {
-		width: '100%',
+		width: '101%',
 		background: `url(${backdropImage})`,
 		backgroundSize: 'contain',
 		backgroundRepeat: 'no-repeat',
