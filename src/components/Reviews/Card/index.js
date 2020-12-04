@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	Card,
+	Card as MUICard,
 	CardContent,
 	CardMedia,
 	Typography,
@@ -10,7 +10,7 @@ import {Rating} from '@material-ui/lab';
 import parse from 'html-react-parser';
 import {useStyles} from './styles';
 
-const ReviewCard = (props) => {
+const Card = (props) => {
 	const {title, content, backdropImage, rating, feedLoading} = props || {};
 	const classes = useStyles(backdropImage)();
 
@@ -22,7 +22,7 @@ const ReviewCard = (props) => {
 		<Slide
 			in={!feedLoading}
 		>
-			<Card
+			<MUICard
 				classes={{root: classes.card}}
 			>
 				<CardMedia
@@ -57,9 +57,9 @@ const ReviewCard = (props) => {
 						{parse(content, parseOptions)[2]}
 					</Typography>
 				</CardContent>
-			</Card>
+			</MUICard>
 		</Slide>
 	);
 }
 
-export default ReviewCard;
+export default Card;

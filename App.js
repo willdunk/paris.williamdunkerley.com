@@ -8,7 +8,7 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom";
-import {Main, Reviews} from './src/pages';
+import {Main, Reviews, Review} from './src/pages';
 
 const App = () => (
 	<div className="App">
@@ -20,8 +20,11 @@ const App = () => (
 						<Route exact path="/">
 							<Main/>
 						</Route>
-						<Route path={["/reviews/:reviewId", "/reviews"]}>
+						<Route path={"/reviews"}>
 							<Reviews/>
+						</Route>
+						<Route path={"/review/:reviewId"}>
+							<Review/>
 						</Route>
 						<Route path="/travel">
 							<span>There</span>

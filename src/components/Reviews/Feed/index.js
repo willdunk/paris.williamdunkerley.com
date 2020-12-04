@@ -3,15 +3,13 @@ import {Grid} from '@material-ui/core';
 import {useSelector, useDispatch} from 'react-redux';
 import {actions} from '../../../actions';
 import {Loading} from '../../common';
-import {ReviewCard} from '../../Reviews';
+import {Card} from '../../Reviews';
 import {useStyles} from './styles';
-import {useParams} from 'react-router-dom';
 
-const ReviewFeed = (props) => {
+const Feed = (props) => {
 	const {feed, feedLoading, feedError} = useSelector(state => ({...state.letterboxd}));
 	const dispatch = useDispatch();
 	const classes = useStyles();
-	const {reviewId} = useParams();
 
 	useEffect(() => {
 		dispatch(actions.getFeed());
@@ -26,8 +24,7 @@ const ReviewFeed = (props) => {
 				<Loading className={`${classes.loadingImg}`}/>
 			) : (
 				feed.sort((a, b) => b.publishedDate - a.publishedDate)
-				.filter((review) => reviewId===undefined || review.reviewId===reviewId)
-				.map((review, key) => <Grid item {...{ key, xs:12, sm:6, md:4 }}><ReviewCard {... { feedLoading, ...review }} /></Grid>)
+				.map((review, key) => <Grid item {...{ key, xs:12, sm:6, md:4 }}><Card {... { feedLoading, ...review }} /></Grid>)
 			)
 		);
 	}
@@ -50,4 +47,4 @@ const ReviewFeed = (props) => {
 	)
 }
 
-export default ReviewFeed;
+export default Feed;
