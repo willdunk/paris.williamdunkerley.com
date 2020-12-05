@@ -9,10 +9,12 @@ import {
 import {Rating} from '@material-ui/lab';
 import parse from 'html-react-parser';
 import {useStyles} from './styles';
+import { useHistory } from 'react-router-dom'
 
 const Card = (props) => {
-	const {title, content, backdropImage, rating, feedLoading} = props || {};
+	const {reviewId, title, content, backdropImage, rating, feedLoading} = props || {};
 	const classes = useStyles(backdropImage)();
+	const history = useHistory();
 
 	const parseOptions = {
 		replace: ({ name, children }) => (name === 'p' && children.length === 1 && children[0].name === "img" ? <></> : null)
@@ -24,6 +26,7 @@ const Card = (props) => {
 		>
 			<MUICard
 				classes={{root: classes.card}}
+				onClick={() => {history.push(`/review/${reviewId}`)}}
 			>
 				<CardMedia
 					classes={{ root: `${classes.cardMedia} ${"cardImage"}` }}

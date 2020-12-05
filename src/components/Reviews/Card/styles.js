@@ -9,13 +9,9 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 	},
 	cardContent: {
 		padding: theme.spacing(1),
-		"&:last-child": {
-			paddingBottom: theme.spacing(1),
-		},
 		"& p:last-of-type": {
 			marginBottom: 0,
 		},
-		backgroundColor: 'white',
 	},
 	cardMedia: {
 		width: '101%',
