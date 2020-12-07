@@ -8,9 +8,7 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom";
-import {Main, Reviews, Review} from './src/pages';
-
-const WIP = () => <span>WIP</span>
+import {routes} from "./src/utils";
 
 const App = () => (
 	<div className="App">
@@ -19,27 +17,9 @@ const App = () => (
 				<CssBaseline />
 				<Router>
 					<Switch>
-						<Route exact path="/">
-							<Main/>
-						</Route>
-						<Route path={"/reviews"}>
-							<Reviews/>
-						</Route>
-						<Route path={"/review/:reviewId"}>
-							<Review/>
-						</Route>
-						<Route path="/travel">
-							<WIP />
-						</Route>
-						<Route path="/photography">
-							<WIP />
-						</Route>
-						<Route path="/blog">
-							<WIP />
-						</Route>
-						<Route path="/podcasts">
-							<WIP />
-						</Route>
+						{routes.map((route, key) => <Route 
+							{...{ key, ...route}} 
+						/>)}
 					</Switch>
 				</Router>
 			</ThemeProvider>

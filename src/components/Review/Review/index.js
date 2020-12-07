@@ -34,9 +34,7 @@ const Review = (props) => {
 			>
 				{reviewError && <span>{reviewError.message || "There was an error"}</span>}
 				{reviewLoading && !reviewError && <Loading className={`${classes.loadingImg}`}/>}
-				{!reviewLoading && !reviewError && <Card
-					classes={{ root: classes.root }}
-				>
+				{!reviewLoading && !reviewError && <Card>
 					<CardMedia
 						classes={{ root: classes.cardMedia }}
 						component="div"

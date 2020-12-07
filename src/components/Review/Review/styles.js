@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = (backdropImage) => makeStyles(theme => ({
-	root: {
-		margin: `${theme.spacing(2)}px ${0}px`,
-	},
 	cardContent: {
 		padding: theme.spacing(1),
 		"&:last-child": {
