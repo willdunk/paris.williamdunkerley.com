@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import {Main, Reviews, Review} from './src/pages';
 
+const WIP = () => <span>WIP</span>
+
 const App = () => (
 	<div className="App">
 		<Provider store={store}>
@@ -27,7 +29,16 @@ const App = () => (
 							<Review/>
 						</Route>
 						<Route path="/travel">
-							<span>There</span>
+							<WIP />
+						</Route>
+						<Route path="/photography">
+							<WIP />
+						</Route>
+						<Route path="/blog">
+							<WIP />
+						</Route>
+						<Route path="/podcasts">
+							<WIP />
 						</Route>
 					</Switch>
 				</Router>

@@ -1,11 +1,9 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
-import {Drawer, Container} from '../../common';
-import {useStyles} from './styles';
+import {Nav, Container} from '../../common';
 
 const Layout = (props) => {
 	const {children} = props;
-	const classes = useStyles();
 	
 	return (
 		<Grid
@@ -13,13 +11,15 @@ const Layout = (props) => {
 		>
 			<Grid
 				item
-				classes={{ root: classes.nav }}
+				xs={12}
 			>
-				<Drawer />
+				<Container>
+					<Nav />
+				</Container>
 			</Grid>
 			<Grid
 				item
-				classes={{ root: classes.body }}
+				xs={12}
 			>
 				<Container {...{children}}/>
 			</Grid>
