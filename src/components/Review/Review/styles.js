@@ -33,10 +33,11 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 		textAlign: 'center',
 	},
 	rating: {
-		fontSize: theme.spacing(10),
-		marginBottom: theme.spacing(2)
+		opacity: .5,
+		fontSize: `calc((min(${20}vw, ${theme.breakpoints.values.md/5}px)) - ${theme.spacing(8)/5}px)`,
+		marginBottom: theme.spacing(1)
 	},
 	header: {
-		marginTop: theme.spacing(-20),
+		marginTop: theme.spacing(-10),
 	},
 }));

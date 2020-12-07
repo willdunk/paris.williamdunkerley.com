@@ -1,11 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
-	cardsContainer: {
-		textAlign: 'center',
+	nav: {
+		margin: `${theme.spacing(3)}px ${0}px ${theme.spacing(4)}`,
 	},
-	loadingImg: {
-		width: theme.spacing(20),
-		height: 'auto',
-	}
 }));
