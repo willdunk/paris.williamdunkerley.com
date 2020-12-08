@@ -6,6 +6,6 @@ export const useStyles = makeStyles(theme => ({
 	},
 	loadingImg: {
 		width: theme.spacing(20),
-		height: 'auto',
+		alignSelf: 'center',
 	}
 }));

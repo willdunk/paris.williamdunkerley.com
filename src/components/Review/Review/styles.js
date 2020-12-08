@@ -24,7 +24,7 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 	},
 	loadingImg: {
 		width: theme.spacing(20),
-		height: 'auto',
+		alignSelf: 'center',
 	},
 	title: {
 		textAlign: 'center',
