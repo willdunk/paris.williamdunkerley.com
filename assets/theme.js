@@ -7,7 +7,7 @@ export const theme = createMuiTheme({
 		secondary: lightblue,
 		background: {
 			default: blue.main,
-		}
+		},
 	},
 	typography: {
 		fontFamily: [

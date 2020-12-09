@@ -7,9 +7,8 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
 } from "react-router-dom";
-import {Main, Reviews} from './src/pages';
+import {routes} from "./src/utils";
 
 const App = () => (
 	<div className="App">
@@ -18,15 +17,9 @@ const App = () => (
 				<CssBaseline />
 				<Router>
 					<Switch>
-						<Route exact path="/">
-							<Main/>
-						</Route>
-						<Route path="/reviews">
-							<Reviews/>
-						</Route>
-						<Route path="/travel">
-							<span>There</span>
-						</Route>
+						{routes.map((route, key) => <Route 
+							{...{ key, ...route}} 
+						/>)}
 					</Switch>
 				</Router>
 			</ThemeProvider>

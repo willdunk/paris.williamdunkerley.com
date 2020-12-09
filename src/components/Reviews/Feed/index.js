@@ -3,10 +3,10 @@ import {Grid} from '@material-ui/core';
 import {useSelector, useDispatch} from 'react-redux';
 import {actions} from '../../../actions';
 import {Loading} from '../../common';
-import {ReviewCard} from '../../Reviews';
+import {Card} from '../../Reviews';
 import {useStyles} from './styles';
 
-const ReviewFeed = (props) => {
+const Feed = (props) => {
 	const {feed, feedLoading, feedError} = useSelector(state => ({...state.letterboxd}));
 	const dispatch = useDispatch();
 	const classes = useStyles();
@@ -19,11 +19,13 @@ const ReviewFeed = (props) => {
 		if (feedError) {
 			return (<span>{feedError.message || "There was an error"}</span>)
 		}
-		return (feedLoading ? (
-			<Loading className={`${classes.loadingImg}`}/>
-		) : (
-			feed.sort((a, b) => b.publishedDate - a.publishedDate)
-			).map((review, i) => <ReviewCard {... {key: i, feedLoading, ...review}} />)
+		return (
+			feedLoading ? (
+				<Loading className={`${classes.loadingImg}`}/>
+			) : (
+				feed.sort((a, b) => b.publishedDate - a.publishedDate)
+				.map((review, key) => <Grid item {...{ key, xs:12, sm:6, md:4 }}><Card {... { feedLoading, ...review }} /></Grid>)
+			)
 		);
 	}
 
@@ -36,17 +38,13 @@ const ReviewFeed = (props) => {
 				item
 				container
 				xs={12}
-				md={8}
 				justify={'center'}
+				spacing={2}
 			>
-				<Grid
-					item
-				>
-					{renderBody()}
-				</Grid>
+				{renderBody()}
 			</Grid>
 		</Grid>
 	)
 }
 
-export default ReviewFeed;
+export default Feed;

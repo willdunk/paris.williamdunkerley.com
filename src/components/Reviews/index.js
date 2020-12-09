@@ -1,7 +1,7 @@
-import ReviewCard from './ReviewCard';
-import ReviewFeed from './ReviewFeed';
+import Card from './Card';
+import Feed from './Feed';
 
 export {
-	ReviewCard,
-	ReviewFeed
+	Card,
+	Feed
 };

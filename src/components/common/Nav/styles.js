@@ -1,11 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
-	cardsContainer: {
-		textAlign: 'center',
+	link: {
+		color: theme.palette.primary.contrastText,
 	},
-	loadingImg: {
-		width: 100,
-		height: 'auto',
-	}
 }));

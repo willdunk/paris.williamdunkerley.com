@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = (backdropImage) => makeStyles(theme => ({
-	root: {
-		marginTop: theme.spacing(2),
-	},
 	cardContent: {
 		padding: theme.spacing(1),
 		"&:last-child": {
@@ -15,6 +12,7 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 	},
 	cardMedia: {
 		width: '100%',
+		height: 'auto',
 		background: `linear-gradient(transparent, white), url(${backdropImage})`,
 		backgroundSize: 'contain',
 		backgroundRepeat: 'no-repeat',
@@ -24,7 +22,19 @@ export const useStyles = (backdropImage) => makeStyles(theme => ({
 		height: 'auto',
 		visibility: 'hidden',
 	},
+	loadingImg: {
+		width: theme.spacing(20),
+		alignSelf: 'center',
+	},
 	title: {
 		textAlign: 'center',
+	},
+	rating: {
+		opacity: .5,
+		fontSize: `calc((min(${20}vw, ${theme.breakpoints.values.md/5}px)) - ${theme.spacing(8)/5}px)`,
+		marginBottom: theme.spacing(1)
+	},
+	header: {
+		marginTop: theme.spacing(-10),
 	},
 }));

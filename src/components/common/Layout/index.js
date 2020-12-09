@@ -1,25 +1,43 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
-import {Drawer, Container} from '../../common';
-import {useStyles} from './styles';
+import {Grid, Typography} from '@material-ui/core';
+import {Nav, Container} from '../../common';
+import { useStyles } from './styles';
+import { useLocation } from 'react-router-dom';
+import { matchPath } from 'react-router';
+import {routes} from '../../../utils';
+import theme from '../../../../assets/theme';
 
 const Layout = (props) => {
 	const {children} = props;
-	const classes = useStyles();
-	
+	const classes = useStyles(theme);
+	const location = useLocation();
+	const route = routes.find(route => matchPath(location.pathname, route));
+
 	return (
 		<Grid
 			container
 		>
 			<Grid
 				item
-				classes={{ root: classes.nav }}
+				xs={12}
+				classes={{root: classes.nav}}
 			>
-				<Drawer />
+				<Container>
+					<Nav />
+				</Container>
 			</Grid>
+			{!route.noTitle && <Grid
+				item
+				xs={12}
+			>
+				<Typography variant="h3" classes={{root: classes.title}}>
+					{route.text}
+				</Typography>
+			</Grid>}
 			<Grid
 				item
-				classes={{ root: classes.body }}
+				xs={12}
+				classes={{root: classes.container}}
 			>
 				<Container {...{children}}/>
 			</Grid>
