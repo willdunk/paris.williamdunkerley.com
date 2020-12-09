@@ -4,6 +4,9 @@ const initialState = {
 	feed: [],
 	feedLoading: false,
 	feedError: undefined,
+	review: {},
+	reviewLoading: false,
+	reviewError: undefined,
 };
 
 export const letterboxdReducer = (state = initialState, action) => {
@@ -28,6 +31,27 @@ export const letterboxdReducer = (state = initialState, action) => {
 				feed: [],
 				feedLoading: false,
 				feedError: action.payload,
+			}
+		case actionTypes.GET_REVIEW_BEGIN:
+			return {
+				...state,
+				review: {},
+				reviewLoading: true,
+				reviewError: undefined,
+			};
+		case actionTypes.GET_REVIEW_SUCCESS:
+			return {
+				...state,
+				review: action.payload,
+				reviewLoading: false,
+				reviewError: undefined,
+			}
+		case actionTypes.GET_REVIEW_FAILURE:
+			return {
+				...state,
+				review: [],
+				reviewLoading: false,
+				reviewError: action.payload,
 			}
 		default:
 			return state;

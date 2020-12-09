@@ -1,9 +1,9 @@
 import React from 'react';
 import {Layout} from '../../components/common';
-import {ReviewFeed} from '../../components/Reviews';
+import {Feed} from '../../components/Reviews';
 
 const Reviews = (props) => (<Layout>
-	<ReviewFeed/>
+	<Feed/>
 </Layout>);
 
 export default Reviews;
