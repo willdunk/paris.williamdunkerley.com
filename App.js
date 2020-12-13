@@ -10,21 +10,24 @@ import {
 } from "react-router-dom";
 import {routes} from "./src/utils";
 
-const App = () => (
-	<div className="App">
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Router>
-					<Switch>
-						{routes.map((route, key) => <Route 
-							{...{ key, ...route}} 
-						/>)}
-					</Switch>
-				</Router>
-			</ThemeProvider>
-		</Provider>
-	</div>
-);
+const App = () => {
+	console.log(process.env.HASH);
+	return (
+		<div className="App">
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<Router>
+						<Switch>
+							{routes.map((route, key) => <Route
+								{...{ key, ...route }}
+							/>)}
+						</Switch>
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		</div>
+	);
+}
 
 export default App;
