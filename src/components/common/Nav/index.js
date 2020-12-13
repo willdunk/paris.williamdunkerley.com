@@ -15,6 +15,7 @@ const MobileNav = (props) => {
 	return [
 		(<Grid
 			item
+			key={0}
 		>
 			<IconButton
 				edge="start"
@@ -33,7 +34,7 @@ const MobileNav = (props) => {
 				onClose={handleClose}
 			>
 				{routes.filter((route) => route.mainLink).map((route, key) => (
-					<Link {...{ to: route.path, style: { textDecoration: 'none' } }}>
+					<Link {...{ key, to: route.path, style: { textDecoration: 'none' } }}>
 						<MUILink component={MenuItem} onClick={handleClose}>
 							{route.text}
 						</MUILink>
@@ -43,6 +44,7 @@ const MobileNav = (props) => {
 		</Grid>),(
 		<Grid
 			item
+			key={1}
 		>
 			<Typography variant="h5" classes={{root: classes.link}}>WD.com</Typography>
 		</Grid>)
