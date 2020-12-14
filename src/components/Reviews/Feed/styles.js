@@ -7,5 +7,11 @@ export const useStyles = makeStyles(theme => ({
 	loadingImg: {
 		width: theme.spacing(20),
 		alignSelf: 'center',
-	}
+	},
+	loadMore: {
+		marginTop: theme.spacing(4)
+	},
+	loadMoreIcon: {
+		marginRight: theme.spacing(1),
+	},
 }));

@@ -29,7 +29,7 @@ const getFeedFailure = (payload) => ({
 	payload,
 });
 
-const getFeed = () => {
+const getFeed = (pageNumber) => {
 	return (dispatch) => {
 		dispatch(getFeedBegin());
 		return axios.get(`${process.env.API_BASE}/review`, {
@@ -38,6 +38,12 @@ const getFeed = () => {
 				'Content-Type': 'application/json',
 				'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
 			},
+			params: {
+				page_number: pageNumber,
+				page_size: 9,
+				order_by: 'published_date',
+				order_direction: 'DESC',
+			}
 		})
 			.then((response) => {
 				dispatch(getFeedSuccess(response.data.map((review) => ({
