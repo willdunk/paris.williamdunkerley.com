@@ -14,21 +14,19 @@ export const letterboxdReducer = (state = initialState, action) => {
 		case actionTypes.GET_FEED_BEGIN:
 			return {
 				...state,
-				feed: [],
 				feedLoading: true,
 				feedError: undefined,
 			};
 		case actionTypes.GET_FEED_SUCCESS:
 			return {
 				...state,
-				feed: action.payload,
+				feed: [...state.feed, ...action.payload],
 				feedLoading: false,
 				feedError: undefined,
 			}
 		case actionTypes.GET_FEED_FAILURE:
 			return {
 				...state,
-				feed: [],
 				feedLoading: false,
 				feedError: action.payload,
 			}
@@ -49,7 +47,7 @@ export const letterboxdReducer = (state = initialState, action) => {
 		case actionTypes.GET_REVIEW_FAILURE:
 			return {
 				...state,
-				review: [],
+				review: {},
 				reviewLoading: false,
 				reviewError: action.payload,
 			}
