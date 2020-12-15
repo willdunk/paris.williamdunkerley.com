@@ -26,7 +26,7 @@ const Layout = (props) => {
 					<Nav />
 				</Container>
 			</Grid>
-			{!route.noTitle && <Grid
+			{!route.text && <Grid
 				item
 				xs={12}
 			>
