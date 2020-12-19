@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import {letterboxdReducer} from './letterboxd';
-import { reducer as formReducer } from 'redux-form'
+import {letterboxdReducer as letterboxd} from './letterboxd';
+import {loginReducer as login} from './login';
+import { reducer as form } from 'redux-form'
 
 export default combineReducers({
-	letterboxd: letterboxdReducer,
-	form: formReducer,
+	letterboxd,
+	login,
+	form,
 });

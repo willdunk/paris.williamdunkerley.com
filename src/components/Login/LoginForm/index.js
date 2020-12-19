@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm, submit} from 'redux-form'
 import {Card, Grid, TextField, CardContent, Typography, Button} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+import { actions } from '../../../actions';
 
 const FORM_NAME = 'login';
 
@@ -26,6 +27,7 @@ const LoginReduxForm = reduxForm({
 })(props => {
 	const { handleSubmit } = props;
 	const dispatch = useDispatch();
+
 	return (
 		<Grid
 			container
@@ -45,6 +47,7 @@ const LoginReduxForm = reduxForm({
 							<Grid
 								container
 								spacing={2}
+								justify="center"
 							>
 								<Grid
 									item
@@ -72,12 +75,18 @@ const LoginReduxForm = reduxForm({
 										autoComplete="current-password"
 									/>
 								</Grid>
+								<Grid
+									item
+								>
+									<Button
+										color={"primary"}
+										variant={"contained"}
+										onClick={() => dispatch(submit(FORM_NAME))}
+									>
+										Login
+									</Button>
+								</Grid>
 							</Grid>
-							<Button
-								onClick={() => dispatch(submit(FORM_NAME))}
-							>
-								Login
-							</Button>
 						</form>
 					</CardContent>
 				</Card>
@@ -87,7 +96,11 @@ const LoginReduxForm = reduxForm({
 })
 
 const LoginForm = (props) => {
-	const onSubmit = (values) => { console.log(values); }
+	const dispatch = useDispatch();
+	const onSubmit = (values) => {
+		console.log(values);
+		dispatch(actions.postUserLogin(values));
+	}
 	return (<LoginReduxForm {...{onSubmit}} />);
 }
 
