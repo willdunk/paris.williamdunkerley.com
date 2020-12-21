@@ -28,6 +28,18 @@ export const loginReducer = (state = initialState, action) => {
 				refresh_token: undefined,
 				login_error: action.payload,
 			};
+		case actionTypes.GET_USERINFO_BEGIN:
+			return {
+				...state,
+			};
+		case actionTypes.GET_USERINFO_SUCCESS:
+			return {
+				...state,
+			};
+		case actionTypes.GET_USERINFO_FAILURE:
+			return {
+				...state,
+			};
 		default:
 			return state;
 	}

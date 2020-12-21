@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Field, reduxForm, submit} from 'redux-form'
 import {Card, Grid, TextField, CardContent, Typography, Button} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -98,9 +98,13 @@ const LoginReduxForm = reduxForm({
 const LoginForm = (props) => {
 	const dispatch = useDispatch();
 	const onSubmit = (values) => {
-		console.log(values);
 		dispatch(actions.postUserLogin(values));
 	}
+
+	useEffect(() => {
+		dispatch(actions.getUserInfo());
+	}, []);
+
 	return (<LoginReduxForm {...{onSubmit}} />);
 }
 

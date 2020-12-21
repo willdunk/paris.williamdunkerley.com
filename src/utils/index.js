@@ -61,3 +61,9 @@ export const routes = [
 		children: <Login />
 	},
 ]
+
+export const corsHeaders = {
+	'Access-Control-Allow-Origin': '*',
+	'Content-Type': 'application/json',
+	'Access-Control-Allow-Methods': '*',
+};
