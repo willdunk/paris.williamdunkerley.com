@@ -62,8 +62,6 @@ export const routes = [
 	},
 ]
 
-export const corsHeaders = {
-	'Access-Control-Allow-Origin': '*',
-	'Content-Type': 'application/json',
-	'Access-Control-Allow-Methods': '*',
-};
+// export const headers = (auth_token) = {
+// 	'Authorization': `Bearer ${auth_token}`,
+// };

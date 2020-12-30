@@ -1,4 +1,4 @@
-import { createError, corsHeaders as headers } from '../utils';
+import { createError } from '../utils';
 import axios from 'axios';
 
 export const actionTypes = {
@@ -30,6 +30,7 @@ const postUserLogin = (payload) => {
 		return axios.post(`${process.env.API_BASE}/user/login`, payload)
 			.then((response) => {
 				localStorage.setItem('access_token', response.data.access_token);
+				localStorage.setItem('refresh_token', response.data.refresh_token);
 				dispatch(postUserLoginSuccess(response.data));
 				return response;
 			})
@@ -72,6 +73,41 @@ const getUserInfo = () => {
 			})
 	}
 };
+
+// const validateAccessToken = () => {
+// 	return (dispatch) => {
+// 		return axios.get(`${process.env.API_BASE}/user/info`, {
+// 			headers: {
+// 				'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+// 			}
+// 		})
+// 			.then((response) => {
+// 				return response;
+// 			})
+// 			.catch((error) => {
+// 				return error;
+// 			});
+// 	}
+// }
+
+// const refreshAccessToken = () => {
+// 	return async (dispatch) => {
+// 		try {
+// 			const reponse = await axios.get(`${process.env.API_BASE}/user/token/refresh`, {
+// 				headers: {...headers(localStorage.getItem('refresh_token'))}
+// 			});
+// 		}
+// 		catch (error) {
+// 			//
+// 		}
+// 		return 'done';
+// 	}
+// }
+
+// const redirectToLogin = () => {
+// 	//dispatch true to "redirect to login page action"
+// 	//dispatch false to "redirect to login page action" 
+// }
 
 export const actions = {
 	postUserLogin,
