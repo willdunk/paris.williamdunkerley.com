@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Grid, Link as MUILink, Menu, MenuItem, IconButton, useMediaQuery, Typography} from '@material-ui/core';
 import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
 import { Link } from "react-router-dom";
 import { useStyles } from './styles';
 import theme from '../../../../assets/theme';
 import {routes} from '../../../utils';
+import { useSelector, useDispatch } from 'react-redux';
+import { actions } from '../../../actions';
 
 const MobileNav = (props) => {
 	const {classes} = props;
@@ -46,7 +48,9 @@ const MobileNav = (props) => {
 			item
 			key={1}
 		>
-			<Typography variant="h5" classes={{root: classes.link}}>WD.com</Typography>
+			<Typography variant="h5" classes={{root: classes.link}}>
+				WD.com
+			</Typography>
 		</Grid>)
 	];
 };
@@ -54,12 +58,27 @@ const MobileNav = (props) => {
 const Nav = (props) => {
 	const classes = useStyles(theme);
 	const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
+	const { userinfo } = useSelector(state => ({ ...state.login }));
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(actions.getUserInfo());
+	}, []);
+
+	console.log(userinfo);
+
 	return (
 		<Grid
 			container
 			justify={isMobile ? "space-between" : "space-around"}
 			alignItems="center"
 		>
+			{userinfo.username !== undefined && <Grid
+				item
+				xs={12}
+			>
+				Logged in as {userinfo.username}
+			</Grid>}
 			{isMobile ? <MobileNav {...{classes}}/> : routes.filter((route) => route.mainLink).map((route, key) => (
 				<Grid item {...{ key }}>
 					<Link {...{ to: route.path, style: { textDecoration: 'none' } }}>

@@ -1,45 +1,37 @@
 import { actionTypes } from '../actions';
 
 const initialState = {
-	access_token: undefined,
-	refresh_token: undefined,
-	login_error: undefined,
+	userinfo: {}
 };
 
 export const loginReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// case actionTypes.POST_USERLOGIN_BEGIN:
-		// 	return {
-		// 		...state,
-		// 		access_token: undefined,
-		// 		refresh_token: undefined,
-		// 		login_error: undefined,
-		// 	};
-		// case actionTypes.POST_USERLOGIN_SUCCESS:
-		// 	return {
-		// 		...state,
-		// 		...action.payload,
-		// 		login_error: undefined,
-		// 	};
-		// case actionTypes.POST_USERLOGIN_FAILURE:
-		// 	return {
-		// 		...state,
-		// 		access_token: undefined,
-		// 		refresh_token: undefined,
-		// 		login_error: action.payload,
-		// 	};
-		// case actionTypes.GET_USERINFO_BEGIN:
-		// 	return {
-		// 		...state,
-		// 	};
-		// case actionTypes.GET_USERINFO_SUCCESS:
-		// 	return {
-		// 		...state,
-		// 	};
-		// case actionTypes.GET_USERINFO_FAILURE:
-		// 	return {
-		// 		...state,
-		// 	};
+		case actionTypes.POST_USERLOGIN_BEGIN:
+			return {
+				...state,
+			};
+		case actionTypes.POST_USERLOGIN_SUCCESS:
+			return {
+				...state,
+				...action.payload,
+			};
+		case actionTypes.POST_USERLOGIN_FAILURE:
+			return {
+				...state,
+			};
+		case actionTypes.GET_USERINFO_BEGIN:
+			return {
+				...state,
+			};
+		case actionTypes.GET_USERINFO_SUCCESS:
+			return {
+				...state,
+				userinfo: action.payload,
+			};
+		case actionTypes.GET_USERINFO_FAILURE:
+			return {
+				...state,
+			};
 		default:
 			return state;
 	}
