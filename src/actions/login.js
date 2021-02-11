@@ -8,6 +8,9 @@ export const actionTypes = {
 	GET_USERINFO_BEGIN: "GET_USERINFO_BEGIN",
 	GET_USERINFO_SUCCESS: "GET_USERINFO_SUCCESS",
 	GET_USERINFO_FAILURE: "GET_USERINFO_FAILURE",
+	POST_USERTOKENREFRESH_BEGIN: "POST_USERTOKENREFRESH_BEGIN",
+	POST_USERTOKENREFRESH_SUCCESS: "POST_USERTOKENREFRESH_SUCCESS",
+	POST_USERTOKENREFRESH_FAILURE: "POST_USERTOKENREFRESH_FAILURE",
 }
 
 const postUserLoginBegin = () => ({
@@ -74,42 +77,42 @@ const getUserInfo = () => {
 	}
 };
 
-// const validateAccessToken = () => {
-// 	return (dispatch) => {
-// 		return axios.get(`${process.env.API_BASE}/user/info`, {
-// 			headers: {
-// 				'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-// 			}
-// 		})
-// 			.then((response) => {
-// 				return response;
-// 			})
-// 			.catch((error) => {
-// 				return error;
-// 			});
-// 	}
-// }
+const postUserTokenRefreshBegin = () => ({
+	type: actionTypes.GET_USERINFO_BEGIN,
+});
 
-// const refreshAccessToken = () => {
-// 	return async (dispatch) => {
-// 		try {
-// 			const reponse = await axios.get(`${process.env.API_BASE}/user/token/refresh`, {
-// 				headers: {...headers(localStorage.getItem('refresh_token'))}
-// 			});
-// 		}
-// 		catch (error) {
-// 			//
-// 		}
-// 		return 'done';
-// 	}
-// }
+const postUserTokenRefreshSuccess = (payload) => ({
+	type: actionTypes.GET_USERINFO_SUCCESS,
+	payload,
+});
 
-// const redirectToLogin = () => {
-// 	//dispatch true to "redirect to login page action"
-// 	//dispatch false to "redirect to login page action" 
-// }
+const postUserTokenRefreshFailure = (payload) => ({
+	type: actionTypes.GET_USERINFO_FAILURE,
+	payload,
+});
+
+const postUserTokenRefresh = () => {
+	return (dispatch) => {
+		dispatch(postUserTokenRefreshBegin());
+		return axios.post(`${process.env.API_BASE}/user/token/refresh`, {}, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
+			}
+		})
+			.then((response) => {
+				localStorage.setItem('access_token', response.data.access_token);
+				dispatch(postUserTokenRefreshSuccess(response.data));
+				return response;
+			})
+			.catch((error) => {
+				dispatch(postUserTokenRefreshFailure(createError(error)));
+				return error;
+			})
+	}
+}
 
 export const actions = {
 	postUserLogin,
 	getUserInfo,
+	postUserTokenRefresh,
 }

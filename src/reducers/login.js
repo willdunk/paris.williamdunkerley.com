@@ -32,6 +32,18 @@ export const loginReducer = (state = initialState, action) => {
 			return {
 				...state,
 			};
+		case actionTypes.POST_USERTOKENREFRESH_BEGIN:
+			return {
+				...state,
+			};
+		case actionTypes.POST_USERTOKENREFRESH_SUCCESS:
+			return {
+				...state,
+			};
+		case actionTypes.POST_USERTOKENREFRESH_FAILURE:
+			return {
+				...state,
+			};
 		default:
 			return state;
 	}

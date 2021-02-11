@@ -19,6 +19,7 @@ const Layout = (props) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.getUserInfo());
+		dispatch(actions.postUserTokenRefresh());
 	}, []);
 
 	console.log(userinfo);
