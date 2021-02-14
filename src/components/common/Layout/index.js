@@ -16,13 +16,6 @@ const Layout = (props) => {
 	const route = routes.find(route => matchPath(location.pathname, route));
 
 	const { userinfo } = useSelector(state => ({ ...state.login }));
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(actions.getUserInfo());
-		dispatch(actions.postUserTokenRefresh());
-	}, []);
-
-	console.log(userinfo);
 
 	return (
 		<Grid
