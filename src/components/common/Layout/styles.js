@@ -13,5 +13,8 @@ export const useStyles = makeStyles(theme => ({
 	},
 	container: {
 		padding: `${theme.spacing(2)}px ${0}px`,
-	}
+	},
+	title: {
+		flexGrow: 1,
+	},
 }));

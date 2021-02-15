@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid, Typography, AppBar, Toolbar, Button} from '@material-ui/core';
 import {Nav, Container} from '../../common';
 import { useStyles } from './styles';
 import { useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
 import {routes} from '../../../utils';
 import theme from '../../../../assets/theme';
-import { useSelector, useDispatch } from 'react-redux';
-import { actions } from '../../../actions';
+import { useSelector} from 'react-redux';
 
 const Layout = (props) => {
 	const {children} = props;
@@ -15,17 +14,32 @@ const Layout = (props) => {
 	const location = useLocation();
 	const route = routes.find(route => matchPath(location.pathname, route));
 	const { authenticated, userinfo } = useSelector(state => ({ ...state.login }));
-	
+
 	return (
 		<Grid
 			container
 		>
-			{authenticated && userinfo.username !== undefined && <Grid
-				item
-				xs={12}
+			<AppBar
+				position="static"
+				color="secondary"
 			>
-				Logged in as {userinfo.username}
-			</Grid>}
+				<Toolbar
+					variant="dense"
+				>
+					<Typography
+						classes={{ root: classes.title }}
+					>
+						WilliamDunkerley.com
+					</Typography>
+					{authenticated && userinfo.username !== undefined ? <Typography>
+						Logged in as {userinfo.username}
+					</Typography> : <Button
+						color="inherit"
+					>
+							Login
+					</Button>}
+				</Toolbar>
+			</AppBar>
 			<Grid
 				item
 				xs={12}
