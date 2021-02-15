@@ -14,14 +14,13 @@ const Layout = (props) => {
 	const classes = useStyles(theme);
 	const location = useLocation();
 	const route = routes.find(route => matchPath(location.pathname, route));
-
-	const { userinfo } = useSelector(state => ({ ...state.login }));
-
+	const { authenticated, userinfo } = useSelector(state => ({ ...state.login }));
+	
 	return (
 		<Grid
 			container
 		>
-			{userinfo.username !== undefined && <Grid
+			{authenticated && userinfo.username !== undefined && <Grid
 				item
 				xs={12}
 			>

@@ -17,9 +17,10 @@ const store = configureStore({});
 const Authentication = (props) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(actions.getUserInfo());
-		dispatch(actions.postUserTokenRefresh());
+		dispatch(actions.authenticateUser());
 	}, []);
+
+	// const {authenticated} = useSelector(state => ({ ...state.login }));
 
 	return (props.children);
 };

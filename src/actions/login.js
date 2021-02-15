@@ -78,16 +78,16 @@ const getUserInfo = () => {
 };
 
 const postUserTokenRefreshBegin = () => ({
-	type: actionTypes.GET_USERINFO_BEGIN,
+	type: actionTypes.POST_USERTOKENREFRESH_BEGIN,
 });
 
 const postUserTokenRefreshSuccess = (payload) => ({
-	type: actionTypes.GET_USERINFO_SUCCESS,
+	type: actionTypes.POST_USERTOKENREFRESH_SUCCESS,
 	payload,
 });
 
 const postUserTokenRefreshFailure = (payload) => ({
-	type: actionTypes.GET_USERINFO_FAILURE,
+	type: actionTypes.POST_USERTOKENREFRESH_FAILURE,
 	payload,
 });
 
@@ -111,8 +111,30 @@ const postUserTokenRefresh = () => {
 	}
 }
 
+const authenticateUser = () => {
+	return (dispatch) => {
+		dispatch(postUserTokenRefreshBegin());
+		return axios.post(`${process.env.API_BASE}/user/token/refresh`, {}, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
+			}
+		})
+			.then((response) => {
+				localStorage.setItem('access_token', response.data.access_token);
+				dispatch(postUserTokenRefreshSuccess(response.data));
+				dispatch(getUserInfo());
+				return response;
+			})
+			.catch((error) => {
+				dispatch(postUserTokenRefreshFailure(createError(error)));
+				return error;
+			})
+	}
+}
+
 export const actions = {
 	postUserLogin,
 	getUserInfo,
 	postUserTokenRefresh,
+	authenticateUser,
 }

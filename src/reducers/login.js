@@ -1,7 +1,8 @@
 import { actionTypes } from '../actions';
 
 const initialState = {
-	userinfo: {}
+	userinfo: {},
+	authenticated: false,
 };
 
 export const loginReducer = (state = initialState, action) => {
@@ -31,6 +32,7 @@ export const loginReducer = (state = initialState, action) => {
 		case actionTypes.GET_USERINFO_FAILURE:
 			return {
 				...state,
+				userinfo: undefined,
 			};
 		case actionTypes.POST_USERTOKENREFRESH_BEGIN:
 			return {
@@ -39,10 +41,12 @@ export const loginReducer = (state = initialState, action) => {
 		case actionTypes.POST_USERTOKENREFRESH_SUCCESS:
 			return {
 				...state,
+				authenticated: true,
 			};
 		case actionTypes.POST_USERTOKENREFRESH_FAILURE:
 			return {
 				...state,
+				authenticated: false,
 			};
 		default:
 			return state;
