@@ -3,6 +3,8 @@ import { actionTypes } from '../actions';
 const initialState = {
 	userinfo: {},
 	authenticated: false,
+	redirectToLogin: false,
+	redirectToHome: false,
 };
 
 export const loginReducer = (state = initialState, action) => {
@@ -47,6 +49,21 @@ export const loginReducer = (state = initialState, action) => {
 			return {
 				...state,
 				authenticated: false,
+			};
+		case actionTypes.POST_USERLOGOUT_BEGIN:
+			return {
+				...state,
+				redirectToHome: false,
+				redirectToLogin: false,
+			};
+		case actionTypes.POST_USERTOKENREFRESH_SUCCESS:
+			return {
+				...state,
+				redirectToHome: true,
+			};
+		case actionTypes.POST_USERTOKENREFRESH_FAILURE:
+			return {
+				...state,
 			};
 		default:
 			return state;

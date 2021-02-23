@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router';
 import {routes} from "./src/utils";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actions } from './src/actions';
 
 const store = configureStore({});

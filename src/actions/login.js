@@ -11,6 +11,9 @@ export const actionTypes = {
 	POST_USERTOKENREFRESH_BEGIN: "POST_USERTOKENREFRESH_BEGIN",
 	POST_USERTOKENREFRESH_SUCCESS: "POST_USERTOKENREFRESH_SUCCESS",
 	POST_USERTOKENREFRESH_FAILURE: "POST_USERTOKENREFRESH_FAILURE",
+	POST_USERLOGOUT_BEGIN: "POST_USERLOGOUT_BEGIN",
+	POST_USERLOGOUT_SUCCESS: "POST_USERLOGOUT_SUCCESS",
+	POST_USERLOGOUT_FAILURE: "POST_USERLOGOUT_FAILURE", 
 }
 
 const postUserLoginBegin = () => ({
@@ -132,9 +135,63 @@ const authenticateUser = () => {
 	}
 }
 
+const postUserLogoutBegin = () => ({
+	type: actionTypes.POST_USERLOGOUT_BEGIN,
+});
+
+const postUserLogoutSuccess = (payload) => ({
+	type: actionTypes.POST_USERLOGOUT_SUCCESS,
+	payload,
+});
+
+const postUserLogoutFailure = (payload) => ({
+	type: actionTypes.POST_USERLOGOUT_FAILURE,
+	payload,
+});
+
+const postUserLogout = (someFunction) => {
+	return (dispatch) => {
+		dispatch(postUserLogoutBegin());
+		console.log("begin");
+		return axios.post(`${process.env.API_BASE}/user/logout/access`, {}, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+			}
+		})
+			.then((response) => {
+				console.log("access success");
+				localStorage.setItem('access_token', undefined);
+				axios.post(`${process.env.API_BASE}/user/logout/refresh`, {}, {
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
+					}
+				})
+					.then((response) => {
+						console.log("refresh success");
+						someFunction();
+						localStorage.setItem('refresh_token', undefined);
+						dispatch(postUserLogoutSuccess());
+						return response;
+					})
+					.catch((error) => {
+						console.log("refresh failure");
+						dispatch(postUserLogoutFailure(createError(error)));
+						return error;
+					})
+				return response;
+			})
+			.catch((error) => {
+				console.log("access failure");
+				dispatch(postUserLogoutFailure(createError(error)));
+				return error;
+			})
+	}
+}
+
 export const actions = {
 	postUserLogin,
 	getUserInfo,
 	postUserTokenRefresh,
 	authenticateUser,
+	postUserLogout,
 }
