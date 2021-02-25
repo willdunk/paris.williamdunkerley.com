@@ -4,15 +4,15 @@ import { useSelector, useDispatch} from 'react-redux';
 import { useStyles } from './styles';
 import theme from '../../../../assets/theme';
 import { actions } from '../../../actions';
+import { useHistory } from 'react-router-dom'
 
 const LogoutButton = (props) => {
 	const dispatch = useDispatch();
-	const x = 5;
+	const history = useHistory();
 	return (<Button
 		color="inherit"
 		onClick={() => {
-			console.log("logout");
-			dispatch(actions.postUserLogout(()=>{console.log(5)}));
+			dispatch(actions.postUserLogout(() => {history.push('/login');}));
 		}}
 	>
 		Logout
@@ -29,10 +29,11 @@ const UserContext = ({username}) => {
 };
 
 const LoginButton = (props) => {
+	const history = useHistory();
 	return (<Button
 		color="inherit"
 		onClick={() => {
-			console.log("login");
+			history.push('/login');
 		}}
 	>
 		Login
@@ -40,7 +41,7 @@ const LoginButton = (props) => {
 };
 
 const Bar = (props) => {
-	const { authenticated, userinfo, redirectToLogin, redirectToHome } = useSelector(state => ({ ...state.login }));
+	const { authenticated, userinfo} = useSelector(state => ({ ...state.login }));
 	const classes = useStyles(theme);
 
 	return (<AppBar
@@ -55,7 +56,7 @@ const Bar = (props) => {
 			>
 				WilliamDunkerley.com
 			</Typography>
-			{authenticated && !!userinfo.username ? <UserContext {...userinfo}/> : <LoginButton/>}
+			{authenticated && !!userinfo ? <UserContext {...userinfo}/> : <LoginButton/>}
 		</Toolbar>
 	</AppBar>);
 };

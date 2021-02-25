@@ -149,42 +149,63 @@ const postUserLogoutFailure = (payload) => ({
 	payload,
 });
 
-const postUserLogout = (someFunction) => {
+const postUserLogoutAccess = (onSuccess, onFailure) => {
+	return axios.post(`${process.env.API_BASE}/user/logout/access`, {}, {
+		headers: {
+			'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+		}
+	})
+		.then((response) => {
+			onSuccess(response);
+			return response;
+		})
+		.catch((error) => {
+			onFailure(error);
+			return error;
+		});
+};
+
+const postUserLogoutRefresh = (onSuccess, onFailure) => {
+	return axios.post(`${process.env.API_BASE}/user/logout/refresh`, {}, {
+		headers: {
+			'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
+		}
+	})
+		.then((response) => {
+			onSuccess(response);
+			return response;
+		})
+		.catch((error) => {
+			onFailure(error);
+			return error;
+		});
+};
+
+const postUserLogout = (onSuccess) => {
 	return (dispatch) => {
 		dispatch(postUserLogoutBegin());
-		console.log("begin");
-		return axios.post(`${process.env.API_BASE}/user/logout/access`, {}, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-			}
-		})
-			.then((response) => {
-				console.log("access success");
+		postUserLogoutAccess(
+			(response) => {
 				localStorage.setItem('access_token', undefined);
-				axios.post(`${process.env.API_BASE}/user/logout/refresh`, {}, {
-					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
-					}
-				})
-					.then((response) => {
-						console.log("refresh success");
-						someFunction();
+				postUserLogoutRefresh(
+					(response) => {
 						localStorage.setItem('refresh_token', undefined);
+						onSuccess();
 						dispatch(postUserLogoutSuccess());
 						return response;
-					})
-					.catch((error) => {
-						console.log("refresh failure");
+					},
+					(error) => {
 						dispatch(postUserLogoutFailure(createError(error)));
 						return error;
-					})
+					}
+				);
 				return response;
-			})
-			.catch((error) => {
-				console.log("access failure");
+			},
+			(error) => {
 				dispatch(postUserLogoutFailure(createError(error)));
 				return error;
-			})
+			}
+		);
 	}
 }
 
