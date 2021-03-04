@@ -16,6 +16,7 @@ const Layout = (props) => {
 	return (
 		<Grid
 			container
+			classes={{root: classes.root}}
 		>
 			<Bar/>
 			<Grid

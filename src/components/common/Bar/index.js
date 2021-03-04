@@ -5,6 +5,7 @@ import { useStyles } from './styles';
 import theme from '../../../../assets/theme';
 import { actions } from '../../../actions';
 import { useHistory } from 'react-router-dom';
+import pinkCursor from '../../../../assets/static/pinkCursor.png';
 
 const LogoutButton = (props) => {
 	const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const LoginButton = (props) => {
 
 const Bar = (props) => {
 	const { authenticated, userinfo} = useSelector(state => ({ ...state.login }));
+	document.body.style.cursor = userinfo && userinfo.username === "maddie" ? `url(${pinkCursor}) 0 0, auto` : 'auto';
 	const classes = useStyles(theme);
 
 	return (<AppBar

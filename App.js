@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router';
 import {routes} from "./src/utils";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions } from './src/actions';
 
 const store = configureStore({});
@@ -19,8 +19,6 @@ const Authentication = (props) => {
 	useEffect(() => {
 		dispatch(actions.authenticateUser());
 	}, []);
-
-	// const {authenticated} = useSelector(state => ({ ...state.login }));
 
 	return (props.children);
 };
