@@ -4,7 +4,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import { useStyles } from './styles';
 import theme from '../../../../assets/theme';
 import { actions } from '../../../actions';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 const LogoutButton = (props) => {
 	const dispatch = useDispatch();
@@ -12,7 +12,10 @@ const LogoutButton = (props) => {
 	return (<Button
 		color="inherit"
 		onClick={() => {
-			dispatch(actions.postUserLogout(() => {history.push('/login');}));
+			dispatch(actions.logoutUser(() => {
+				history.push('/login');
+				history.go(0);
+			}));
 		}}
 	>
 		Logout
@@ -34,6 +37,7 @@ const LoginButton = (props) => {
 		color="inherit"
 		onClick={() => {
 			history.push('/login');
+			history.go(0);
 		}}
 	>
 		Login

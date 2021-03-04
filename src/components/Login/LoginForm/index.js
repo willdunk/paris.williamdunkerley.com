@@ -3,6 +3,7 @@ import { Field, reduxForm, submit} from 'redux-form'
 import {Card, Grid, TextField, CardContent, Typography, Button} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../actions';
+import { useHistory } from 'react-router-dom';
 
 const FORM_NAME = 'login';
 
@@ -97,13 +98,13 @@ const LoginReduxForm = reduxForm({
 
 const LoginForm = (props) => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const onSubmit = (values) => {
-		dispatch(actions.postUserLogin(values));
+		dispatch(actions.loginUser(values, () => {
+			history.push('/');
+			history.go(0);
+		}));
 	}
-
-	useEffect(() => {
-		dispatch(actions.getUserInfo());
-	}, []);
 
 	return (<LoginReduxForm {...{onSubmit}} />);
 }

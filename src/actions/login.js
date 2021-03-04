@@ -1,5 +1,11 @@
 import { createError } from '../utils';
-import axios from 'axios';
+import {
+	postUserLogoutAccess,
+	postUserLogoutRefresh,
+	postUserTokenRefresh,
+	getUserInfo,
+	postUserLogin,
+} from '../api';
 
 export const actionTypes = {
 	POST_USERLOGIN_BEGIN: "POST_USERLOGIN_BEGIN",
@@ -30,20 +36,21 @@ const postUserLoginFailure = (payload) => ({
 	payload,
 });
 
-const postUserLogin = (payload) => {
+const loginUser = (payload, onSuccess, onFailure) => {
 	return (dispatch) => {
 		dispatch(postUserLoginBegin());
-		return axios.post(`${process.env.API_BASE}/user/login`, payload)
-			.then((response) => {
-				localStorage.setItem('access_token', response.data.access_token);
-				localStorage.setItem('refresh_token', response.data.refresh_token);
-				dispatch(postUserLoginSuccess(response.data));
-				return response;
-			})
-			.catch((error) => {
-				dispatch(postUserLoginFailure(createError(error)));
-				return error;
-			})
+		return postUserLogin(payload, (response) => {
+			localStorage.setItem('access_token', response.data.access_token);
+			localStorage.setItem('refresh_token', response.data.refresh_token);
+			onSuccess && onSuccess(response);
+			dispatch(postUserLoginSuccess(response.data));
+			return response;
+		},
+		(error) => {
+			onFailure && onFailure(error);
+			dispatch(postUserLoginFailure(createError(error)));
+			return error;
+		})
 	}
 };
 
@@ -61,25 +68,6 @@ const getUserInfoFailure = (payload) => ({
 	payload,
 });
 
-const getUserInfo = () => {
-	return (dispatch) => {
-		dispatch(getUserInfoBegin());
-		return axios.get(`${process.env.API_BASE}/user/info`, { 
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-			}
-		})
-			.then((response) => {
-				dispatch(getUserInfoSuccess(response.data));
-				return response;
-			})
-			.catch((error) => {
-				dispatch(getUserInfoFailure(createError(error)));
-				return error;
-			})
-	}
-};
-
 const postUserTokenRefreshBegin = () => ({
 	type: actionTypes.POST_USERTOKENREFRESH_BEGIN,
 });
@@ -94,44 +82,27 @@ const postUserTokenRefreshFailure = (payload) => ({
 	payload,
 });
 
-const postUserTokenRefresh = () => {
-	return (dispatch) => {
-		dispatch(postUserTokenRefreshBegin());
-		return axios.post(`${process.env.API_BASE}/user/token/refresh`, {}, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
-			}
-		})
-			.then((response) => {
-				localStorage.setItem('access_token', response.data.access_token);
-				dispatch(postUserTokenRefreshSuccess(response.data));
-				return response;
-			})
-			.catch((error) => {
-				dispatch(postUserTokenRefreshFailure(createError(error)));
-				return error;
-			})
-	}
-}
-
 const authenticateUser = () => {
 	return (dispatch) => {
 		dispatch(postUserTokenRefreshBegin());
-		return axios.post(`${process.env.API_BASE}/user/token/refresh`, {}, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
-			}
-		})
-			.then((response) => {
-				localStorage.setItem('access_token', response.data.access_token);
-				dispatch(postUserTokenRefreshSuccess(response.data));
-				dispatch(getUserInfo());
+		return postUserTokenRefresh((response) => {
+			localStorage.setItem('access_token', response.data.access_token);
+			dispatch(postUserTokenRefreshSuccess(response.data));
+			dispatch(getUserInfoBegin());
+			return getUserInfo((response) => {
+				dispatch(getUserInfoSuccess(response.data));
 				return response;
-			})
-			.catch((error) => {
-				dispatch(postUserTokenRefreshFailure(createError(error)));
+			},
+			(error) => {
+				dispatch(getUserInfoFailure(createError(error)));
 				return error;
 			})
+			return response;
+		},
+		(error) => {
+			dispatch(postUserTokenRefreshFailure(createError(error)));
+			return error;
+		});
 	}
 }
 
@@ -149,52 +120,21 @@ const postUserLogoutFailure = (payload) => ({
 	payload,
 });
 
-const postUserLogoutAccess = (onSuccess, onFailure) => {
-	return axios.post(`${process.env.API_BASE}/user/logout/access`, {}, {
-		headers: {
-			'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-		}
-	})
-		.then((response) => {
-			onSuccess(response);
-			return response;
-		})
-		.catch((error) => {
-			onFailure(error);
-			return error;
-		});
-};
-
-const postUserLogoutRefresh = (onSuccess, onFailure) => {
-	return axios.post(`${process.env.API_BASE}/user/logout/refresh`, {}, {
-		headers: {
-			'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`
-		}
-	})
-		.then((response) => {
-			onSuccess(response);
-			return response;
-		})
-		.catch((error) => {
-			onFailure(error);
-			return error;
-		});
-};
-
-const postUserLogout = (onSuccess) => {
+const logoutUser = (onSuccess, onFailure) => {
 	return (dispatch) => {
 		dispatch(postUserLogoutBegin());
-		postUserLogoutAccess(
+		return postUserLogoutAccess(
 			(response) => {
 				localStorage.setItem('access_token', undefined);
-				postUserLogoutRefresh(
+				return postUserLogoutRefresh(
 					(response) => {
 						localStorage.setItem('refresh_token', undefined);
-						onSuccess();
+						onSuccess && onSuccess();
 						dispatch(postUserLogoutSuccess());
 						return response;
 					},
 					(error) => {
+						onFailure && onFailure();
 						dispatch(postUserLogoutFailure(createError(error)));
 						return error;
 					}
@@ -202,6 +142,7 @@ const postUserLogout = (onSuccess) => {
 				return response;
 			},
 			(error) => {
+				onFailure && onFailure();
 				dispatch(postUserLogoutFailure(createError(error)));
 				return error;
 			}
@@ -210,9 +151,7 @@ const postUserLogout = (onSuccess) => {
 }
 
 export const actions = {
-	postUserLogin,
-	getUserInfo,
-	postUserTokenRefresh,
+	loginUser,
 	authenticateUser,
-	postUserLogout,
+	logoutUser,
 }
