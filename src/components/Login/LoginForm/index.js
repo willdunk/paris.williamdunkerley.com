@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
-import { Field, reduxForm, submit} from 'redux-form'
+import { Field, reduxForm, submit} from 'redux-form';
+import {SubmissionError} from 'redux-form';
 import {Card, Grid, TextField, CardContent, Typography, Button} from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import {Alert} from '@material-ui/lab';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../../actions';
 import { useHistory } from 'react-router-dom';
 
@@ -12,21 +14,19 @@ const ReduxTextField = ({
 	input,
 	meta: { touched, invalid, error },
 	...custom
-}) => (
-		<TextField
-			label={label}
-			placeholder={label}
-			error={touched && invalid}
-			helperText={touched && error}
-			{...input}
-			{...custom}
-		/>
-	)
+}) => (<TextField
+	label={label}
+	placeholder={label}
+	error={touched && invalid}
+	helperText={touched && error}
+	{...input}
+	{...custom}
+/>)
 
 const LoginReduxForm = reduxForm({
-	form: FORM_NAME
+	form: FORM_NAME,
 })(props => {
-	const { handleSubmit } = props;
+	const { handleSubmit, error, pristine, reset, submitting} = props;
 	const dispatch = useDispatch();
 
 	return (
@@ -76,6 +76,7 @@ const LoginReduxForm = reduxForm({
 										autoComplete="current-password"
 									/>
 								</Grid>
+								{!!error && <Grid item xs={12}><Alert severity="error">{error}</Alert></Grid>}
 								<Grid
 									item
 								>
@@ -100,9 +101,11 @@ const LoginForm = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const onSubmit = (values) => {
-		dispatch(actions.loginUser(values, () => {
+		return dispatch(actions.loginUser(values, () => {
 			history.push('/');
 			history.go(0);
+		}, (error) => {
+			throw new SubmissionError({_error: "Login Failed!"});
 		}));
 	}
 
