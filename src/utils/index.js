@@ -60,7 +60,3 @@ export const routes = [
 		children: <Login />
 	},
 ]
-
-// export const headers = (auth_token) = {
-// 	'Authorization': `Bearer ${auth_token}`,
-// };
