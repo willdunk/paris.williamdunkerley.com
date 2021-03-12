@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, Reviews, Review, Login } from '../pages';
+import { Main, Reviews, Review, Login, Podcasts } from '../pages';
 const WIP = () => <span>WIP</span>
 
 export const createError = ({message}) => {
@@ -51,7 +51,7 @@ export const routes = [
 		path: "/podcasts",
 		text: "Podcasts",
 		mainLink: true,
-		children: <WIP />
+		children: <Podcasts />
 	},
 	{
 		path: "/login",
