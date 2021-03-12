@@ -67,7 +67,6 @@ export const getUserInfo = (onSuccess, onFailure) => {
 export const postUserLogin = (payload, onSuccess, onFailure) => {
 	return axios.post(`${process.env.API_BASE}/user/login`, payload)
 		.then((response) => {
-			console.log("Completed successfully");
 			onSuccess && onSuccess(response);
 			return response;
 		})

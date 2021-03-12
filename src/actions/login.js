@@ -89,7 +89,7 @@ const authenticateUser = () => {
 			localStorage.setItem('access_token', response.data.access_token);
 			dispatch(postUserTokenRefreshSuccess(response.data));
 			dispatch(getUserInfoBegin());
-			return getUserInfo((response) => {
+			getUserInfo((response) => {
 				dispatch(getUserInfoSuccess(response.data));
 				return response;
 			},
@@ -126,7 +126,7 @@ const logoutUser = (onSuccess, onFailure) => {
 		return postUserLogoutAccess(
 			(response) => {
 				localStorage.setItem('access_token', undefined);
-				return postUserLogoutRefresh(
+				postUserLogoutRefresh(
 					(response) => {
 						localStorage.setItem('refresh_token', undefined);
 						onSuccess && onSuccess();

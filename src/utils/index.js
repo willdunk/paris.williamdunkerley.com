@@ -3,8 +3,6 @@ import { Main, Reviews, Review, Login } from '../pages';
 const WIP = () => <span>WIP</span>
 
 export const createError = ({message}) => {
-	console.log("Error:");
-	console.log(message);
 	return {
 		message,
 	};
