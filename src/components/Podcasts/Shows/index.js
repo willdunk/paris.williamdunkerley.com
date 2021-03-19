@@ -10,11 +10,11 @@ const Shows = (props) => {
 		description: "A variety music show of randomly-selected albums & songs from our massive LP library",
 		episodes: [
 			{
-				episode_id: "string",
-				episode_number: 0,
-				title: "string",
-				description: "string",
-				uri: "string",
+				episode_id: "1",
+				episode_number: 1,
+				title: "Week 1: Pilot",
+				description: "This is the Pilot Episode of Flipside. Just testing things out here",
+				uri: "http://data.williamdunkerley.com/Podcasts/Flipside/Week_1_Pilot.mp3",
 				published_date: "2021-03-12T02:04:50.385Z",
 				show_id: "string"
 			}
