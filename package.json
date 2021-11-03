@@ -3,9 +3,9 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=http://localhost:8000/api/v1 parcel index.html ",
-		"start:dev": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://backend.williamdunkerley.com/api/v1 parcel index.html ",
-		"build:dev": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://backend.williamdunkerley.com/api/v1 parcel build index.html --no-minify",
-		"build:prod": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://backend.williamdunkerley.com/api/v1 parcel build index.html --no-minify",
+		"start:dev": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://warsaw.williamdunkerley.com/api/v1 parcel index.html ",
+		"build:dev": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://warsaw.williamdunkerley.com/api/v1 parcel build index.html --no-minify",
+		"build:prod": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://warsaw.williamdunkerley.com/api/v1 parcel build index.html --no-minify",
 		"build": "yarn build:prod"
 	},
 	"dependencies": {
