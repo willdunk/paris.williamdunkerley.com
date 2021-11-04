@@ -5,6 +5,7 @@ import {
 	postUserTokenRefresh,
 	getUserInfo,
 	postUserLogin,
+	postUserRegister,
 } from '../api';
 
 export const actionTypes = {
@@ -42,18 +43,19 @@ const postUserLoginFailure = (payload) => ({
 const loginUser = (payload, onSuccess, onFailure) => {
 	return (dispatch) => {
 		dispatch(postUserLoginBegin());
-		return postUserLogin(payload, (response) => {
-			localStorage.setItem('access_token', response.data.access_token);
-			localStorage.setItem('refresh_token', response.data.refresh_token);
-			onSuccess && onSuccess(response);
-			dispatch(postUserLoginSuccess(response.data));
-			return response;
-		},
-		(error) => {
-			onFailure && onFailure(error);
-			dispatch(postUserLoginFailure(createError(error)));
-			return error;
-		})
+		return postUserLogin(payload, 
+			(response) => {
+				localStorage.setItem('access_token', response.data.access_token);
+				localStorage.setItem('refresh_token', response.data.refresh_token);
+				onSuccess && onSuccess(response);
+				dispatch(postUserLoginSuccess(response.data));
+				return response;
+			},
+			(error) => {
+				onFailure && onFailure(error);
+				dispatch(postUserLoginFailure(createError(error)));
+				return error;
+			})
 	}
 };
 
@@ -167,7 +169,7 @@ const postUserRegisterFailure = (payload) => ({
 	payload,
 });
 
-const registerUser = (onSuccess, onFailure) => {
+const registerUser = (payload, onSuccess, onFailure) => {
 	return (dispatch) => {
 		dispatch(postUserRegisterBegin());
 		return postUserRegister(payload, 

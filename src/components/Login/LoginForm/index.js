@@ -59,6 +59,7 @@ const LoginReduxForm = reduxForm({
 										label="Username"
 										variant="outlined"
 										fullWidth={true}
+										autoComplete="username"
 									/>
 								</Grid>
 								<Grid

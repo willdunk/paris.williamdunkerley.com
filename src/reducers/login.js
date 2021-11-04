@@ -59,6 +59,18 @@ export const loginReducer = (state = initialState, action) => {
 			return {
 				...state,
 			};
+		case actionTypes.POST_USERREGISTER_BEGIN:
+			return {
+				...state,
+			};
+		case actionTypes.POST_USERREGISTER_SUCCESS:
+			return {
+				...state,
+			};
+		case actionTypes.POST_USERREGISTER_FAILURE:
+			return {
+				...state,
+			};
 		default:
 			return state;
 	}

@@ -77,7 +77,7 @@ export const postUserLogin = (payload, onSuccess, onFailure) => {
 };
 
 export const postUserRegister = (payload, onSuccess, onFailure) => {
-	return axios.post(`${process.env.API_BASE}/user/login`, payload)
+	return axios.post(`${process.env.API_BASE}/user/register`, payload)
 		.then((response) => {
 			onSuccess && onSuccess(response);
 			return response;

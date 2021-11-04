@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, submit, SubmissionError } from 'redux-form';
-import { Card, Grid, TextField, CardContent, Typography, Button } from '@material-ui/core';
+import { Card, Grid, TextField, CardContent, Typography, Button, Checkbox, FormControlLabel} from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../actions';
@@ -22,8 +22,42 @@ const ReduxTextField = ({
 	{...custom}
 />)
 
+const ReduxCheckbox = ({
+	label,
+	input,
+	meta: { touched, invalid, error },
+	...custom
+}) => (
+	<FormControlLabel
+		control={
+			<Checkbox
+				{...input}
+				checked={input.value ? true : false}
+				onChange={input.onChange}
+				{...custom}
+			/>
+		}
+		label={label}
+	/>
+)
+
+const validate = ({username, password, repeatPassword}) => {
+	const errors = {};
+	if (!username) {
+		errors.username = "Required.";
+	}
+	if (!password) {
+		errors.password = "Required.";
+	}
+	if (password !== repeatPassword) {
+		errors.repeatPassword = "Passwords must match.";
+	}
+	return errors;
+}
+
 const RegistrationReduxForm = reduxForm({
 	form: FORM_NAME,
+	validate,
 })(props => {
 	const { handleSubmit, error, pristine, reset, submitting } = props;
 	const dispatch = useDispatch();
@@ -59,6 +93,7 @@ const RegistrationReduxForm = reduxForm({
 										label="Username"
 										variant="outlined"
 										fullWidth={true}
+										autoComplete="username"
 									/>
 								</Grid>
 								<Grid
@@ -72,7 +107,32 @@ const RegistrationReduxForm = reduxForm({
 										variant="outlined"
 										type="password"
 										fullWidth={true}
-										autoComplete="current-password"
+										autoComplete="new-password"
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+								>
+									<Field
+										name="repeatPassword"
+										component={ReduxTextField}
+										label="Repeat Password"
+										variant="outlined"
+										type="password"
+										fullWidth={true}
+										autoComplete="new-password"
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+								>
+									<Field
+										name="isAdmin"
+										component={ReduxCheckbox}
+										label="Is Administrator"
+										color="primary"
 									/>
 								</Grid>
 								{!!error && <Grid item xs={12}><Alert severity="error">{error}</Alert></Grid>}
@@ -100,7 +160,7 @@ const RegistrationForm = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const onSubmit = (values) => {
-		return dispatch(actions.loginUser(values, () => {
+		return dispatch(actions.registerUser(values, () => {
 			history.push('/');
 			history.go(0);
 		}, (error) => {
