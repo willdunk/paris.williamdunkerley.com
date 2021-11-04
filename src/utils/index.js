@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, Reviews, Review, Login } from '../pages';
+import { Main, Reviews, Review, Login, Registration} from '../pages';
 const WIP = () => <span>WIP</span>
 
 export const createError = ({message}) => {
@@ -59,6 +59,12 @@ export const routes = [
 		mainLink: false,
 		children: <Login />
 	},
+	{
+		path: "/registration",
+		noTitle: true,
+		mainLink: false,
+		children: <Registration />
+	}
 ]
 
 // export const headers = (auth_token) = {

@@ -20,6 +20,9 @@ export const actionTypes = {
 	POST_USERLOGOUT_BEGIN: "POST_USERLOGOUT_BEGIN",
 	POST_USERLOGOUT_SUCCESS: "POST_USERLOGOUT_SUCCESS",
 	POST_USERLOGOUT_FAILURE: "POST_USERLOGOUT_FAILURE", 
+	POST_USERREGISTER_BEGIN: "POSTUSERREGISTER_BEGIN",
+	POST_USERREGISTER_SUCCESS: "POSTUSERREGISTER_SUCCESS",
+	POST_USERREGISTER_FAILURE: "POSTUSERREGISTER_FAILURE",
 }
 
 const postUserLoginBegin = () => ({
@@ -150,8 +153,40 @@ const logoutUser = (onSuccess, onFailure) => {
 	}
 }
 
+const postUserRegisterBegin = () => ({
+	type: actionTypes.POST_USERREGISTER_BEGIN,
+});
+
+const postUserRegisterSuccess = (payload) => ({
+	type: actionTypes.POST_USERREGISTER_SUCCESS,
+	payload,
+});
+
+const postUserRegisterFailure = (payload) => ({
+	type: actionTypes.POST_USERREGISTER_FAILURE,
+	payload,
+});
+
+const registerUser = (onSuccess, onFailure) => {
+	return (dispatch) => {
+		dispatch(postUserRegisterBegin());
+		return postUserRegister(payload, 
+			(response) => {
+				onSuccess && onSuccess(response);
+				dispatch(postUserRegisterSuccess(response.data));
+				return response;
+			},
+			(error) => {
+				onFailure && onFailure(error);
+				dispatch(postUserRegisterFailure(createError(error)));
+				return error;
+			})
+	}
+}
+
 export const actions = {
 	loginUser,
 	authenticateUser,
 	logoutUser,
+	registerUser,
 }
