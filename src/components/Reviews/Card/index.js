@@ -21,47 +21,43 @@ const Card = (props) => {
 	};
 
 	return (
-		<Slide
-			in={!feedLoading}
+		<MUICard
+			classes={{ root: classes.card }}
+			onClick={() => { history.push(`/review/${reviewId}`) }}
 		>
-			<MUICard
-				classes={{root: classes.card}}
-				onClick={() => {history.push(`/review/${reviewId}`)}}
+			<CardMedia
+				classes={{ root: `${classes.cardMedia} ${"cardImage"}` }}
+				component="div"
 			>
-				<CardMedia
-					classes={{ root: `${classes.cardMedia} ${"cardImage"}` }}
+				<img
+					className={classes.backdropImageFrame}
+					alt={title}
+					src={backdropImage}
+				/>
+			</CardMedia>
+			<CardContent
+				classes={{ root: classes.cardContent }}
+			>
+				<Typography
+					classes={{ root: classes.rating }}
+				>
+					<Rating {...{ value: rating / 2, max: 5, precision: 0.5, readOnly: true, size: 'small' }} />
+				</Typography>
+				<Typography
+					variant="h6"
+					classes={{ root: classes.title }}
+				>
+					{title}
+				</Typography>
+				<Typography
+					display="inline"
 					component="div"
+					classes={{ root: classes.body }}
 				>
-					<img
-						className={classes.backdropImageFrame}
-						alt={title}
-						src={backdropImage}
-					/>
-				</CardMedia>
-				<CardContent
-					classes={{ root: classes.cardContent }}
-				>
-					<Typography
-						classes={{ root: classes.rating }}
-					>
-						<Rating {...{ value: rating / 2, max: 5, precision: 0.5, readOnly: true, size: 'small'}} />
-					</Typography>
-					<Typography
-						variant="h6"
-						classes={{ root: classes.title }}
-					>
-						{title}
-					</Typography>
-					<Typography
-						display="inline"
-						component="div"
-						classes={{root: classes.body}}
-					>
-						{parse(content, parseOptions)[2]}
-					</Typography>
-				</CardContent>
-			</MUICard>
-		</Slide>
+					{parse(content, parseOptions)[2]}
+				</Typography>
+			</CardContent>
+		</MUICard>
 	);
 }
 

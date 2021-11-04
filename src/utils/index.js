@@ -1,9 +1,8 @@
 import React from 'react';
-import { Main, Reviews, Review } from '../pages';
+import { Main, Reviews, Review, Login } from '../pages';
 const WIP = () => <span>WIP</span>
 
 export const createError = ({message}) => {
-	console.log(message);
 	return {
 		message,
 	};
@@ -54,4 +53,14 @@ export const routes = [
 		mainLink: true,
 		children: <WIP />
 	},
+	{
+		path: "/login",
+		noTitle: true,
+		mainLink: false,
+		children: <Login />
+	},
 ]
+
+// export const headers = (auth_token) = {
+// 	'Authorization': `Bearer ${auth_token}`,
+// };

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {Nav, Container} from '../../common';
+import {Nav, Container, Bar} from '../../common';
 import { useStyles } from './styles';
 import { useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
@@ -12,11 +12,13 @@ const Layout = (props) => {
 	const classes = useStyles(theme);
 	const location = useLocation();
 	const route = routes.find(route => matchPath(location.pathname, route));
-
+	
 	return (
 		<Grid
 			container
+			classes={{root: classes.root}}
 		>
+			<Bar/>
 			<Grid
 				item
 				xs={12}
@@ -26,7 +28,7 @@ const Layout = (props) => {
 					<Nav />
 				</Container>
 			</Grid>
-			{!route.noTitle && <Grid
+			{!route.text && <Grid
 				item
 				xs={12}
 			>

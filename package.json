@@ -2,12 +2,11 @@
 	"name": "fronttest",
 	"license": "MIT",
 	"scripts": {
-		"start": "cross-env API_BASE=http://localhost:56733/api/v1 parcel index.html ",
-		"start:dev": "cross-env API_BASE=https://prague.williamdunkerley.com/api/v1 parcel index.html ",
-		"build:dev": "cross-env API_BASE=https://prague.williamdunkerley.com/api/v1 parcel build index.html --no-minify --public-url ./",
-		"build:qa": "cross-env API_BASE=https://santiago.williamdunkerley.com/api/v1 parcel build index.html --no-minify --public-url ./",
-		"build:prod": "cross-env API_BASE=https://amsterdam.williamdunkerley.com/api/v1 parcel build index.html --no-minify --public-url ./",
-		"build": "build:prod"
+		"start": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=http://localhost:8000/api/v1 parcel index.html ",
+		"start:dev": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://warsaw.williamdunkerley.com/api/v1 parcel index.html ",
+		"build:dev": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://warsaw.williamdunkerley.com/api/v1 parcel build index.html --no-minify",
+		"build:prod": "export HASH=$(/bin/bash hash.sh) && cross-env API_BASE=https://warsaw.williamdunkerley.com/api/v1 parcel build index.html --no-minify",
+		"build": "yarn build:prod"
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.11.1",
@@ -17,15 +16,20 @@
 		"autoprefixer": "^10.0.4",
 		"axios": "^0.19.2",
 		"babel-preset-react-app": "^3.1.0",
+		"connected-react-router": "^6.8.0",
 		"dotenv": "^8.2.0",
 		"html-react-parser": "^0.10.3",
 		"parcel-bundler": "^1.12.4",
 		"parse5": "^5.1.1",
 		"react": "^16.8.0 || ^17.0.0",
 		"react-dom": "^16.8.0 || ^17.0.0",
+		"react-infinite-scroll-component": "^5.1.0",
+		"react-infinite-scroll-hook": "^3.0.0",
 		"react-redux": "^7.2.0",
 		"react-router-dom": "^5.2.0",
+		"react-router": "^5.2.0",
 		"redux": "^4.0.5",
+		"redux-form": "^8.3.7",
 		"redux-thunk": "^2.3.0",
 		"rss-parser": "^3.7.6"
 	},

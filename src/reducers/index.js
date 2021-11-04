@@ -1,6 +1,12 @@
 import {combineReducers} from 'redux';
-import {letterboxdReducer} from './letterboxd';
+import { connectRouter } from 'connected-react-router'
+import {letterboxdReducer as letterboxd} from './letterboxd';
+import {loginReducer as login} from './login';
+import { reducer as form } from 'redux-form'
 
-export default combineReducers({
-	letterboxd: letterboxdReducer,
+export default (history) => combineReducers({
+	router: connectRouter(history),
+	letterboxd,
+	login,
+	form,
 });

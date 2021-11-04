@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Grid, Link as MUILink, Menu, MenuItem, IconButton, useMediaQuery, Typography} from '@material-ui/core';
 import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ const MobileNav = (props) => {
 	return [
 		(<Grid
 			item
+			key={0}
 		>
 			<IconButton
 				edge="start"
@@ -33,7 +34,7 @@ const MobileNav = (props) => {
 				onClose={handleClose}
 			>
 				{routes.filter((route) => route.mainLink).map((route, key) => (
-					<Link {...{ to: route.path, style: { textDecoration: 'none' } }}>
+					<Link {...{ key, to: route.path, style: { textDecoration: 'none' } }}>
 						<MUILink component={MenuItem} onClick={handleClose}>
 							{route.text}
 						</MUILink>
@@ -43,8 +44,11 @@ const MobileNav = (props) => {
 		</Grid>),(
 		<Grid
 			item
+			key={1}
 		>
-			<Typography variant="h5" classes={{root: classes.link}}>WD.com</Typography>
+			<Typography variant="h5" classes={{root: classes.link}}>
+				WD.com
+			</Typography>
 		</Grid>)
 	];
 };
@@ -52,6 +56,7 @@ const MobileNav = (props) => {
 const Nav = (props) => {
 	const classes = useStyles(theme);
 	const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
 	return (
 		<Grid
 			container
