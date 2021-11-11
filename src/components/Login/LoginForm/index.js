@@ -31,7 +31,7 @@ const LoginReduxForm = reduxForm({
 	return (
 		<Grid
 			container
-			justify="center"
+			justifyContent="center"
 		>
 			<Grid
 				item
@@ -47,7 +47,7 @@ const LoginReduxForm = reduxForm({
 							<Grid
 								container
 								spacing={2}
-								justify="center"
+								justifyContent="center"
 							>
 								<Grid
 									item

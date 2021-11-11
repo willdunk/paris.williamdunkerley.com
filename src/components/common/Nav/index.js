@@ -60,7 +60,7 @@ const Nav = (props) => {
 	return (
 		<Grid
 			container
-			justify={isMobile ? "space-between" : "space-around"}
+			justifyContent={isMobile ? "space-between" : "space-around"}
 			alignItems="center"
 		>
 			{isMobile ? <MobileNav {...{classes}}/> : routes.filter((route) => route.mainLink).map((route, key) => (

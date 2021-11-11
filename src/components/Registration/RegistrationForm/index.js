@@ -65,7 +65,7 @@ const RegistrationReduxForm = reduxForm({
 	return (
 		<Grid
 			container
-			justify="center"
+			justifyContent="center"
 		>
 			<Grid
 				item
@@ -81,7 +81,7 @@ const RegistrationReduxForm = reduxForm({
 							<Grid
 								container
 								spacing={2}
-								justify="center"
+								justifyContent="center"
 							>
 								<Grid
 									item
@@ -129,7 +129,7 @@ const RegistrationReduxForm = reduxForm({
 									xs={12}
 								>
 									<Field
-										name="isAdmin"
+										name="is_admin"
 										component={ReduxCheckbox}
 										label="Is Administrator"
 										color="primary"
