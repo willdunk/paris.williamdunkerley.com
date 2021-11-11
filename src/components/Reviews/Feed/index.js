@@ -28,13 +28,13 @@ const Feed = (props) => {
 	return (
 		<Grid
 			container
-			justify={"center"}
+			justifyContent={"center"}
 		>
 			<Grid
 				item
 				container
 				xs={12}
-				justify={'center'}
+				justifyContent={'center'}
 				spacing={2}
 				ref={infiniteRef}
 			>

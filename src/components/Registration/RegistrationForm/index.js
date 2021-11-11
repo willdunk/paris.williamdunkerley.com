@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import { Field, reduxForm, submit, SubmissionError} from 'redux-form';
-import {Card, Grid, TextField, CardContent, Typography, Button} from '@material-ui/core';
-import {Alert} from '@material-ui/lab';
+import React from 'react';
+import { Field, reduxForm, submit, SubmissionError } from 'redux-form';
+import { Card, Grid, TextField, CardContent, Typography, Button, Checkbox, FormControlLabel} from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../actions';
 import { useHistory } from 'react-router-dom';
 
-const FORM_NAME = 'login';
+const FORM_NAME = 'registration';
 
 const ReduxTextField = ({
 	label,
@@ -22,10 +22,44 @@ const ReduxTextField = ({
 	{...custom}
 />)
 
-const LoginReduxForm = reduxForm({
+const ReduxCheckbox = ({
+	label,
+	input,
+	meta: { touched, invalid, error },
+	...custom
+}) => (
+	<FormControlLabel
+		control={
+			<Checkbox
+				{...input}
+				checked={input.value ? true : false}
+				onChange={input.onChange}
+				{...custom}
+			/>
+		}
+		label={label}
+	/>
+)
+
+const validate = ({username, password, repeatPassword}) => {
+	const errors = {};
+	if (!username) {
+		errors.username = "Required.";
+	}
+	if (!password) {
+		errors.password = "Required.";
+	}
+	if (password !== repeatPassword) {
+		errors.repeatPassword = "Passwords must match.";
+	}
+	return errors;
+}
+
+const RegistrationReduxForm = reduxForm({
 	form: FORM_NAME,
+	validate,
 })(props => {
-	const { handleSubmit, error, pristine, reset, submitting} = props;
+	const { handleSubmit, error, pristine, reset, submitting } = props;
 	const dispatch = useDispatch();
 
 	return (
@@ -41,7 +75,7 @@ const LoginReduxForm = reduxForm({
 				<Card raised={true}>
 					<CardContent>
 						<Typography gutterBottom variant="h5" component="h5">
-							Login
+							Registration
 						</Typography>
 						<form onSubmit={handleSubmit}>
 							<Grid
@@ -73,7 +107,32 @@ const LoginReduxForm = reduxForm({
 										variant="outlined"
 										type="password"
 										fullWidth={true}
-										autoComplete="current-password"
+										autoComplete="new-password"
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+								>
+									<Field
+										name="repeatPassword"
+										component={ReduxTextField}
+										label="Repeat Password"
+										variant="outlined"
+										type="password"
+										fullWidth={true}
+										autoComplete="new-password"
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+								>
+									<Field
+										name="is_admin"
+										component={ReduxCheckbox}
+										label="Is Administrator"
+										color="primary"
 									/>
 								</Grid>
 								{!!error && <Grid item xs={12}><Alert severity="error">{error}</Alert></Grid>}
@@ -85,7 +144,7 @@ const LoginReduxForm = reduxForm({
 										variant={"contained"}
 										onClick={() => dispatch(submit(FORM_NAME))}
 									>
-										Login
+										Register
 									</Button>
 								</Grid>
 							</Grid>
@@ -97,19 +156,19 @@ const LoginReduxForm = reduxForm({
 	);
 })
 
-const LoginForm = (props) => {
+const RegistrationForm = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const onSubmit = (values) => {
-		return dispatch(actions.loginUser(values, () => {
+		return dispatch(actions.registerUser(values, () => {
 			history.push('/');
 			history.go(0);
 		}, (error) => {
-			throw new SubmissionError({_error: "Login Failed!"});
+			throw new SubmissionError({ _error: "Registration Failed!" });
 		}));
 	}
 
-	return (<LoginReduxForm {...{onSubmit}} />);
+	return (<RegistrationReduxForm {...{ onSubmit }} />);
 }
 
-export default LoginForm;
+export default RegistrationForm;

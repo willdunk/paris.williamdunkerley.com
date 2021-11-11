@@ -75,3 +75,15 @@ export const postUserLogin = (payload, onSuccess, onFailure) => {
 			return error;
 		})
 };
+
+export const postUserRegister = (payload, onSuccess, onFailure) => {
+	return axios.post(`${process.env.API_BASE}/user/register`, payload)
+		.then((response) => {
+			onSuccess && onSuccess(response);
+			return response;
+		})
+		.catch((error) => {
+			onFailure && onFailure(error);
+			return error;
+		})
+};
