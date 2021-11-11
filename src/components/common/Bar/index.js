@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Toolbar, Typography, Button} from '@material-ui/core';
+import {AppBar, Toolbar, Typography, Button, Grid} from '@material-ui/core';
 import { useSelector, useDispatch} from 'react-redux';
 import { useStyles } from './styles';
 import theme from '../../../../assets/theme';
@@ -23,27 +23,57 @@ const LogoutButton = (props) => {
 	</Button>);
 };
 
-const UserContext = ({username}) => {
-	return (<>
-		<Typography>
+const UserContext = ({username, classes}) => {
+	return (<Grid
+		container
+		spacing={1}
+		alignItems="center"
+	>
+		<Typography classes={{root: classes.username}}>
 			{username}
 		</Typography>
-		<LogoutButton/>
-	</>);
+		<LogoutButton />
+	</Grid>);
 };
 
-const LoginButton = (props) => {
+const WDButton = ({path, label}) => {
 	const history = useHistory();
 	return (<Button
 		color="inherit"
 		onClick={() => {
-			history.push('/login');
+			history.push(path);
 			history.go(0);
 		}}
 	>
-		Login
+		{label}
 	</Button>);
 };
+
+const LoginContext = (props) => {
+	const buttons = [
+		{
+			path: "/login",
+			label: "Login",
+		},
+		{
+			path: "/registration",
+			label: "Register",
+		},
+	]
+	return (
+		<Grid
+			container
+			spacing={1}
+		>
+			{buttons.map((button, i) => <Grid
+				item
+				key={i}
+			>
+				<WDButton {...button}/>
+			</Grid>)}
+		</Grid>
+	);
+}
 
 const Bar = (props) => {
 	const { authenticated, userinfo} = useSelector(state => ({ ...state.login }));
@@ -57,12 +87,18 @@ const Bar = (props) => {
 		<Toolbar
 			variant="dense"
 		>
-			<Typography
-				classes={{ root: classes.title }}
+			<Grid
+				container
+				justifyContent="space-between"
+				alignItems="center"
 			>
-				WilliamDunkerley.com
-			</Typography>
-			{authenticated && !!userinfo ? <UserContext {...userinfo}/> : <LoginButton/>}
+				<Typography>
+					WilliamDunkerley.com
+				</Typography>
+				<Grid item>
+					{authenticated && !!userinfo ? <UserContext {...{...userinfo, classes}} /> : <LoginContext />}
+				</Grid>
+			</Grid>
 		</Toolbar>
 	</AppBar>);
 };

@@ -30,7 +30,7 @@ const Review = (props) => {
 			<Grid
 				item
 				container
-				justify="center"
+				justifyContent="center"
 			>
 				{reviewError && <span>{reviewError.message || "There was an error"}</span>}
 				{reviewLoading && !reviewError && <Loading className={`${classes.loadingImg}`}/>}
@@ -50,7 +50,7 @@ const Review = (props) => {
 					>
 						<Grid container>
 							<Grid item xs={12} classes={{root: classes.header}}>
-								<Grid container justify="center">
+								<Grid container justifyContent="center">
 									<Grid item>
 										<Rating {...{
 											value: rating / 2,

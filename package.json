@@ -9,7 +9,7 @@
 		"build": "yarn build:prod"
 	},
 	"dependencies": {
-		"@material-ui/core": "^4.11.1",
+		"@material-ui/core": "^4.12.3",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.57",
 		"@types/react": "^16.8.6 || ^17.0.0",

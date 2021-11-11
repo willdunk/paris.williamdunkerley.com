@@ -11,7 +11,7 @@ const MainContent = (props) => {
 	return (
 		<Grid
 			container
-			justify="center"
+			justifyContent="center"
 		>
 			<Grid
 				item
@@ -28,7 +28,7 @@ const MainContent = (props) => {
 				>
 					<Grid
 						container
-						justify="center"
+						justifyContent="center"
 					>
 						<Grid
 							item
