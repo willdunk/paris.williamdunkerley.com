@@ -23,12 +23,8 @@ const icons = [
 	},
 	{
 		Shape: EmailIcon,
-		link: "mailto:hahaveryfun@gmail.com",
-	},
-	{
-		Shape: ProfileIcon,
-		link: "http://data.williamdunkerley.com/Misc/DunkerleyResume.pdf",
-	},
+		link: "mailto:me@williamdunkerley.com",
+	}
 ]
 
 const Social = (props) => {
