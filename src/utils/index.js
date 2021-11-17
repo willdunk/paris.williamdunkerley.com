@@ -1,4 +1,5 @@
 import React from 'react';
+import { TextField } from '@material-ui/core';
 import { Main, Reviews, Review, Login, Registration, Podcasts} from '../pages';
 const WIP = () => <span>WIP</span>
 
@@ -70,3 +71,17 @@ export const routes = [
 // export const headers = (auth_token) = {
 // 	'Authorization': `Bearer ${auth_token}`,
 // };
+
+export const ReduxTextField = ({
+	label,
+	input,
+	meta: { touched, invalid, error },
+	...custom
+}) => (<TextField
+	label={label}
+	placeholder={label}
+	error={touched && invalid}
+	helperText={touched && error}
+	{...input}
+	{...custom}
+/>)
